@@ -5,13 +5,15 @@ export const AnimateType = {
 };
 
 export const Types = {
-    label: {key: 'label', field: 'scale', scaleLevel: 0.08, maxScale: 10, minScale: 1},
-    polyline: {key: 'polyline', field: 'width', scaleLevel: 0.1, maxScale: 20, minScale: 5}
+    billboard: { key: 'billboard', field: 'scale', maxScale: 1.5, minScale: 1, interval: false},
+    label: {key: 'label', field: 'scale', maxScale: 1.5, minScale: 1, interval: false},
+    polyline: {key: 'polyline', field: 'width',  maxScale: 1.5, minScale: 1, interval: false}
 }
 
 export const defaultOptions = {
     type: Types.label.key,
-    duration: 0,//if 0, stop manually with callback
-    animationType: AnimateType.wobble
+    duration: 4,//if 0, stop manually with callback
+    animationType: AnimateType.wobble,
+    timeoutInterval: 50
 };
 

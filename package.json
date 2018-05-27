@@ -15,6 +15,7 @@
   "homepage": "https://cesiumjs.org",
   "license": "Apache-2.0",
   "devDependencies": {
+    "babel-loader": "^7.1.4",
     "cesium": "^1.39.0",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.7",
@@ -23,7 +24,8 @@
     "style-loader": "^0.18.2",
     "uglifyjs-webpack-plugin": "^1.0.0-beta.3",
     "url-loader": "^0.6.2",
-    "webpack": "^3.5.6",
+    "webpack": "^3.12.0",
+    "webpack-cli": "^2.1.4",
     "webpack-dev-server": "^2.9.1"
   },
   "scripts": {
@@ -31,5 +33,9 @@
     "start": "node_modules/.bin/webpack-dev-server --config webpack.config.js",
     "release": "node_modules/.bin/webpack --config webpack.release.config.js",
     "serve-release": "node_modules/.bin/webpack-dev-server --config webpack.release.config.js --content-base /dist"
+  },
+  "dependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0"
   }
 }

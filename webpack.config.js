@@ -41,7 +41,18 @@ module.exports = [{
         }, {
             test: /\.(png|gif|jpg|jpeg|svg|xml|json)$/,
             use: ['url-loader']
-        }]
+        },
+            {
+                test: /\.js$/,
+                exclude: /(node_modules|bower_components)/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['es2015']
+                    }
+                }
+            }
+        ]
     },
     plugins: [
         new HtmlWebpackPlugin({

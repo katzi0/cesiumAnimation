@@ -1,79 +1,57 @@
-import { defaultOptions, Types, AnimateType } from './config';
-import { Cesium } from '../../index';
+import { defaultOptions, Types, AnimateType } from '../config';
+import { Cesium } from '../../../index';
+import { Highlight } from "../highlight";
 
-export class Enlarge {
+export class Enlarge extends Highlight {
 
-    constructor(options, enitity) {
-        this.pickedLabel = {};
-        this.entity = enitity || {};
+    super(pickedLabel, options) {
+        this.pickedLabel = pickedLabel;
         this.options = options;
-        // this.setDefinedPrimitivesInEntity();
-        this.initEnlarge(options);
     }
 
-    get options() {
-        return this._options
+    get scale() {
+        return this._scale;
     }
 
-    set options(options) {
-        this._options = Object.assign({}, defaultOptions, options);
+    set scale(scale) {
+        this._scale = scale;
     }
 
-    initEnlarge(options) {
-        return new Promise((resolve, reject) => {
-
-            for (let primtiveShapeKey in this.pickedLabel) {
-                this.setPrimitiveProp(primtiveShapeKey)
-            }
-            resolve(this.stopCallback.bind(this));
-        })
+    get primitiveConfig() {
+        return this._primitiveConfig;
     }
 
-    setPrimitiveProp(primtiveShapeKey){
-            const primitive = this.pickedLabel[primtiveShapeKey];
-            const maxScale = Types[primtiveShapeKey].maxScale;
-            const minScale = Types[primtiveShapeKey].minScale;
-            let animationAction = {increase: true};
-            let scale = Types[primtiveShapeKey].minScale;
-            let prevScale;
-
-            let obj = {
-                //entity,
-                primitive,
-               // pickedLabel,
-                primtiveShapeKey,
-              //  duration,
-                maxScale,
-                minScale,
-                animationAction,
-                scale,
-                prevScale
-            }
-
-            // if (this.options.duration) {
-            //     this.setAnimationMidpoint(animationAction, this.options.duration);
-            // }
-
-            if (this.options.duration) {
-                this.endAnimation(this.entity, primitive, this.options.duration, primtiveShapeKey);
-            }
-            this.setAnimate(obj);
-        }
-
-    stopCallback() {
-        for (let key in this.pickedLabel) {
-            let primitive = this.pickedLabel[key];
-            primitive[Types[key].field] = 1;
-        }
+    set primitiveConfig(primitiveConfig) {
+        this._primitiveConfig = primitiveConfig;
     }
 
-    setDefinedPrimitivesInEntity() {
-        debugger;
-        if (Cesium.defined(this.entity.polyline))
-            this.pickedLabel.polyline = this.entity.polyline;
-        if (Cesium.defined(this.entity.label))
-            this.pickedLabel.label = this.entity.label;
-    };
+    get primitive() {
+        return this.pickedLabel[this.primtiveShapeKey];
+    }
+
+    set primtiveShapeKey(primtiveShapeKey) {
+        this._primtiveShapeKey = primtiveShapeKey;
+    }
+
+    get primtiveShapeKey() {
+        return this._primtiveShapeKey;
+    }
+
+    // set primitive(primitive)
+    // {
+    //     this._primitive = primitive;
+    // }
+
+    setPrimitiveProp(primtiveShapeKey) {
+        this.scale = Types[primtiveShapeKey].minScale;
+        this.primitiveConfig = Types[primtiveShapeKey];
+        // this.primitive = this.pickedLabel[primtiveShapeKey];
+
+        // if (this.options.duration) {
+        //     this.endAnimation(this.entity, this.primitive, this.options.duration, primtiveShapeKey);
+        // }
+        this.setAnimate();
+    }
 
     setAnimationMidpoint(action, duration) {
         setTimeout(() => {
@@ -81,24 +59,97 @@ export class Enlarge {
         }, duration * 500);
     }
 
-    setAnimate(obj) {
-        obj.primitive[Types[obj.primtiveShapeKey].field] = new Cesium.CallbackProperty(function () {
-            //if (!obj.duration) {
-                if (obj.prevScale && obj.prevScale < obj.scale) {
-                    obj.animationAction.increase = obj.maxScale > obj.scale ? true : false;
-                }
-                else {
-                    obj.animationAction.increase = obj.minScale < obj.scale ? false : true;
-                }
-           // }
-            obj.prevScale = obj.scale;
-            return obj.scale += obj.animationAction.increase ? Math.sin(obj.scale * Types[obj.primtiveShapeKey].scaleLevel) : -Math.sin(obj.scale * Types[obj.primtiveShapeKey].scaleLevel);
-        }, false);
+    // setAnimate() {
+    //
+    //     let prevScale;
+    //     let increase = true;
+    //     const interval = window.setInterval(() => {
+    //         let animationStep = this.scale * this.primitiveConfig.scaleLevel;
+    //         increase = (!prevScale || (prevScale < this.scale && this.scale < this.primitiveConfig.maxScale)) ? true : false;
+    //         prevScale = this.scale;
+    //         this.scale += increase ?  animationStep : - animationStep;
+    //         this.primitive[this.primitiveConfig.field] = this.scale;
+    //         // if (!prevScale || (prevScale < this.scale && this.scale < this.primitiveConfig.maxScale)) {
+    //         //     prevScale = this.scale;
+    //         //     this.scale += this.scale * this.primitiveConfig.scaleLevel;
+    //         //     this.primitive[this.primitiveConfig.field] = this.scale;
+    //         // }
+    //         // else if( this.scale > this.primitiveConfig.minScale) {
+    //         //     prevScale = this.scale;
+    //         //     this.scale -= this.scale * this.primitiveConfig.scaleLevel;
+    //         //     this.primitive[this.primitiveConfig.field] = this.scale;
+    //         // }
+    //         // else {
+    //         //     this.primitive[this.primitiveConfig.field] = this.primitiveConfig.minScale;
+    //         // }
+    //     }, 50);
+    //     window.setTimeout(() => window.clearInterval(interval), this.options.duration*1000);
+    //
+    // }
+
+
+    setAnimate() {
+        let increaseDelta = 1;
+        let increase = true;
+        const scalePerStep = this.calculateEnlargeStep();
+        const durationInSeconds = this.options.duration * 1000;
+        const interval = window.setInterval(() => {
+            if ((this.primitiveConfig.maxScale < this.scale + scalePerStep && increase) || (this.primitiveConfig.minScale > this.scale - scalePerStep && !increase)) {
+                increase = !increase;
+            }
+            increaseDelta += scalePerStep;
+            this.scale += increase ? scalePerStep : -scalePerStep;
+            this.primitive[this.primitiveConfig.field] = this.scale;
+            console.log(this.scale);
+        }, this.options.timeoutInterval);
+        if (!this.primitiveConfig.interval) {
+            window.setTimeout(() => window.clearInterval(interval), durationInSeconds);
+        }
     }
 
-    endAnimation(entity, primitive, duration = 0, type) {
+    calculateEnlargeStep() {
+        const durationInSeconds = this.options.duration * 1000; //mili
+        const numberOfSteps = (durationInSeconds / 2) / this.options.timeoutInterval;
+        const currentScale = this.primitiveConfig.minScale;
+        const destinatedScale = this.primitiveConfig.maxScale;
+        const scaleDelta = destinatedScale - currentScale;
+        const scalePerStep = scaleDelta / numberOfSteps;
+        return scalePerStep;
+    }
+
+    //     obj.primitive[Types[obj.primtiveShapeKey].field] = new Cesium.CallbackProperty(function () {
+    //             if (obj.prevScale && obj.prevScale < obj.scale) {
+    //                 obj.animationAction.increase = obj.maxScale > obj.scale ? true : false;
+    //             }
+    //             else {
+    //                 obj.animationAction.increase = obj.minScale < obj.scale ? false : true;
+    //             }
+    //         obj.prevScale = obj.scale;
+    //         return obj.scale += obj.animationAction.increase ? obj.scale * Types[obj.primtiveShapeKey].scaleLevel : -obj.scale * Types[obj.primtiveShapeKey].scaleLevel;
+    //     }, false);
+    // }
+
+    // endAnimation(entity, primitive, duration = 0, type) {
+    //     setTimeout(() => {
+    //
+    //         primitive[Types[type].field] = 1;
+    //     }, duration * 1000);
+    // };
+
+    endAnimation(entity, primitive, duration = 0, type, obj) {
         setTimeout(() => {
-            primitive[Types[type].field] = 1;
+            primitive[Types[type].field] = new Cesium.CallbackProperty(function () {
+                while (obj.scale > 1) {
+                    if (obj.prevScale < obj.scale && obj.scale < obj.maxScale) {
+                        obj.prevScale = obj.scale;
+                        return obj.scale += obj.scale * Types[obj.primtiveShapeKey].scaleLevel
+                    }
+                    else {
+                        obj.prevScale = obj.scale;
+                        return obj.scale -= obj.scale * Types[obj.primtiveShapeKey].scaleLevel
+                    }
+                }
+            }, false);
         }, duration * 1000);
     };
 }
