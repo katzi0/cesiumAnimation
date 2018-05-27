@@ -1,4 +1,4 @@
-import { Tester } from "./js/testCase";
+import { Tester } from "./js/highlight/test-case/testCase";
 
 require('cesium/Widgets/widgets.css');
 require('./css/main.css');

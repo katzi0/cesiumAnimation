@@ -1,12 +1,39 @@
 <html>
-	<head>
-		<meta charset="utf-8">
-	  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	  	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-		<title>Cesium + Webpack</title>
-	</head>
-	<body>
-		<div id="cesiumContainer"></div>
-		<button id="stopAnimation">stop animatio</button>
-	</body>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <title>Cesium + Webpack</title>
+</head>
+<body>
+<!--<button id="stopAnimation">stop animatioמ</button>-->
+<div class="ddPanel">
+    <div class="ddDiv">
+        <label>Age</label>
+        <select id="ddAge">
+            <option>Under 18</option>
+            <option>18-50</option>
+            <option>51-100</option>
+        </select>
+    </div>
+    <div class="ddDiv">
+        <label>Sex</label>
+        <select id="ddSex">
+            <option>Male</option>
+            <option>Female</option>
+        </select>
+    </div>
+    <div class="ddDiv">
+        <label>Occupation</label>
+        <select id="ddOccupation">
+            <option value="1">Student</option>
+            <option value="2">Architect</option>
+            <option>Baker</option>
+            <option>Biomedical Engineer</option>
+        </select>
+    </div>
+</div>
+<div id="cesiumContainer"></div>
+</body>
 </html>

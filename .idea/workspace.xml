@@ -2,11 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6521a61b-de4e-4678-9558-e5356e02625b" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/js/highlight/animations/changeColor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/highlight/animations/enlarge.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/highlight/animations/enlarge.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/highlight/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/highlight/config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/testCase.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/testCase.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/highlight/animations/changeColor" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/highlight/animations/changeColor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/highlight/highlight.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/highlight/highlight.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/testCase.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/highlight/test-case/testCase.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/testCaseConfig.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/highlight/test-case/testCaseConfig.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -24,7 +27,7 @@
         <entry file="file://$PROJECT_DIR$/src/index.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="187">
-              <caret line="11" selection-start-line="11" selection-end-line="11" />
+              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
             </state>
           </provider>
         </entry>
@@ -32,8 +35,8 @@
       <file leaf-file-name="config.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/js/highlight/config.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="91" selection-start-line="7" selection-start-column="79" selection-end-line="7" selection-end-column="91" />
+            <state relative-caret-position="323">
+              <caret line="19" selection-start-line="19" selection-end-line="19" />
             </state>
           </provider>
         </entry>
@@ -41,7 +44,7 @@
       <file leaf-file-name="enlarge.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/js/highlight/animations/enlarge.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="386">
+            <state relative-caret-position="918">
               <caret line="54" column="66" lean-forward="true" selection-start-line="54" selection-start-column="66" selection-end-line="54" selection-end-column="66" />
               <folding>
                 <element signature="e#0#63#0" expanded="true" />
@@ -51,35 +54,72 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="430">
+              <caret line="32" column="48" lean-forward="true" selection-start-line="32" selection-start-column="48" selection-end-line="32" selection-end-column="48" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="highlight.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/js/highlight/highlight.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="21" column="29" lean-forward="true" selection-start-line="21" selection-start-column="29" selection-end-line="21" selection-end-column="29" />
+            <state relative-caret-position="187">
+              <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
               <folding>
-                <element signature="e#0#49#0" expanded="true" />
+                <element signature="n#!!block;n#options#0;n#Highlight#0" />
+                <element signature="n#!!block;n#options#1;n#Highlight#0" />
+                <element signature="n#!!block;n#startAnimation#0;n#Highlight#0" />
+                <element signature="e#540#791#0" />
+                <element signature="e#601#730#0" />
+                <element signature="n#!!block;n#setPrimitiveProp#0;n#Highlight#0" />
+                <element signature="n#!!block;n#endAnimation#0;n#Highlight#0" />
+                <element signature="n#!!block;n#stopCallback#0;n#Highlight#0" />
+                <element signature="e#1020#1127#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="testCase.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/js/testCase.js">
+      <file leaf-file-name="testCase.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/js/highlight/test-case/testCase.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-141">
-              <caret line="24" column="5" lean-forward="true" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
+            <state relative-caret-position="386">
+              <caret line="84" column="31" selection-start-line="84" selection-start-column="31" selection-end-line="84" selection-end-column="31" />
+              <caret line="85" column="31" selection-start-line="85" selection-start-column="31" selection-end-line="85" selection-end-column="31" />
               <folding>
-                <element signature="e#0#57#0" expanded="true" />
+                <element signature="n#!!block;n#imageUrl#0;n#Tester#0" />
+                <element signature="n#!!block;n#runTest#0;n#Tester#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="changeColor" pinned="false" current-in-tab="true">
+      <file leaf-file-name="testCaseConfig.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/js/highlight/test-case/testCaseConfig.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="13" column="84" selection-start-line="13" selection-start-column="68" selection-end-line="13" selection-end-column="84" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/css/main.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="10" column="1" lean-forward="true" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="changeColor" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/js/highlight/animations/changeColor">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="488">
-              <caret line="62" selection-start-line="62" selection-end-line="62" />
+            <state relative-caret-position="175">
+              <caret line="43" column="28" lean-forward="true" selection-start-line="43" selection-start-column="28" selection-end-line="43" selection-end-column="28" />
               <folding>
                 <element signature="e#0#50#0" expanded="true" />
               </folding>
@@ -91,9 +131,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>end</find>
-      <find>_addHighlightPropToEntity</find>
-      <find>setAnimationMidpoint</find>
       <find>es6</find>
       <find>stop</find>
       <find>setDefinedPrimitivesInEntity</find>
@@ -118,9 +155,12 @@
       <find>debugger</find>
       <find>Enlarge</find>
       <find>imageUrl</find>
-      <find>calculateEnlargeStep</find>
       <find>setPrimitiveProp</find>
       <find>scale</find>
+      <find>calculateEnlargeStep</find>
+      <find>Enum</find>
+      <find>_addHighlightPropToEntity</find>
+      <find>higligh</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -129,7 +169,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/index.html" />
         <option value="$PROJECT_DIR$/src/js/consts.js" />
         <option value="$PROJECT_DIR$/src/js/setHighlightInView" />
         <option value="$PROJECT_DIR$/src/index.js" />
@@ -138,12 +177,16 @@
         <option value="$PROJECT_DIR$/src/js/highlight.js" />
         <option value="$PROJECT_DIR$/src/js/enlarge/highlight.js" />
         <option value="$PROJECT_DIR$/src/js/highlight/enlarge.js" />
-        <option value="$PROJECT_DIR$/src/js/highlight/highlight.js" />
         <option value="$PROJECT_DIR$/src/js/testCaseConfig.js" />
         <option value="$PROJECT_DIR$/src/js/testCase.js" />
         <option value="$PROJECT_DIR$/src/js/highlight/config.js" />
         <option value="$PROJECT_DIR$/src/js/highlight/animations/enlarge.js" />
+        <option value="$PROJECT_DIR$/src/css/main.css" />
+        <option value="$PROJECT_DIR$/src/js/highlight/highlight.js" />
         <option value="$PROJECT_DIR$/src/js/highlight/animations/changeColor" />
+        <option value="$PROJECT_DIR$/src/js/highlight/test-case/testCaseConfig.js" />
+        <option value="$PROJECT_DIR$/src/index.html" />
+        <option value="$PROJECT_DIR$/src/js/highlight/test-case/testCase.js" />
       </list>
     </option>
   </component>
@@ -197,6 +240,12 @@
               <item name="cesium-webpack-example" type="b2602c69:ProjectViewProjectNode" />
               <item name="cesium-webpack-example" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="cesium-webpack-example" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cesium-webpack-example" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="js" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -214,6 +263,14 @@
               <item name="highlight" type="462c0819:PsiDirectoryNode" />
               <item name="animations" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="cesium-webpack-example" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cesium-webpack-example" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="highlight" type="462c0819:PsiDirectoryNode" />
+              <item name="test-case" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -223,19 +280,20 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ansyn" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="yarn" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\shai katz\WebstormProjects\cesium-webpack-example\src" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\shai katz\WebstormProjects\cesium-webpack-example\src\js\highlight\test-case" />
       <recent name="C:\Users\shai katz\WebstormProjects\cesium-webpack-example\src\js\highlight\animations" />
       <recent name="C:\Users\shai katz\WebstormProjects\cesium-webpack-example\src\js\highlight" />
       <recent name="C:\Users\shai katz\WebstormProjects\cesium-webpack-example\src\js\enlarge" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\shai katz\WebstormProjects\cesium-webpack-example\src" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -262,46 +320,35 @@
       <updated>1527065199219</updated>
       <workItem from="1527065201388" duration="10906000" />
       <workItem from="1527084176429" duration="41820000" />
+      <workItem from="1527419095111" duration="7788000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="58618000" />
+    <option name="totallyTimeSpent" value="66472000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12961012" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12961012" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50052685" side_tool="true" weight="0.27559912" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32897604" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="npm" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49947312" visible="true" weight="0.27559912" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.49947312" visible="true" weight="0.27559912" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info id="npm" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12961012" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32897604" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50052685" side_tool="true" weight="0.27559912" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.49947312" visible="true" weight="0.27559912" />
-      <window_info id="Favorites" order="3" side_tool="true" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -312,10 +359,31 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="5" />
+      <option name="time" value="6" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/js/highlight/animations/changeColor">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="33" lean-forward="true" selection-start-line="6" selection-start-column="33" selection-end-line="6" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/highlight/test-case/testCase.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="24" column="5" lean-forward="true" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
+          <folding>
+            <element signature="n#!!block;n#imageUrl#0;n#Tester#0" />
+            <element signature="n#!!block;n#runTest#0;n#Tester#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="612">
@@ -371,16 +439,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/highlight/setHighlightInView">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="8" selection-end-column="1" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/highlight/setHighlightInView" />
     <entry file="file://$PROJECT_DIR$/webpack.config.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="303">
@@ -395,17 +454,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/testCase.js">
+    <entry file="file://$PROJECT_DIR$/src/js/highlight/test-case/testCase.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" column="31" lean-forward="true" selection-start-line="8" selection-start-column="31" selection-end-line="8" selection-end-column="31" />
           <folding>
-            <element signature="e#0#57#0" expanded="true" />
+            <element signature="n#!!block;n#imageUrl#0;n#Tester#0" />
+            <element signature="n#!!block;n#runTest#0;n#Tester#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/testCaseConfig.js">
+    <entry file="file://$PROJECT_DIR$/src/js/highlight/test-case/testCaseConfig.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="16" column="10" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="10" />
@@ -418,7 +478,15 @@
         <state relative-caret-position="238">
           <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
           <folding>
-            <element signature="e#0#49#0" expanded="true" />
+            <element signature="n#!!block;n#options#0;n#Highlight#0" />
+            <element signature="n#!!block;n#options#1;n#Highlight#0" />
+            <element signature="n#!!block;n#startAnimation#0;n#Highlight#0" />
+            <element signature="e#540#791#0" />
+            <element signature="e#601#730#0" />
+            <element signature="n#!!block;n#setPrimitiveProp#0;n#Highlight#0" />
+            <element signature="n#!!block;n#endAnimation#0;n#Highlight#0" />
+            <element signature="n#!!block;n#stopCallback#0;n#Highlight#0" />
+            <element signature="e#1020#1127#0" />
           </folding>
         </state>
       </provider>
@@ -509,7 +577,15 @@
         <state relative-caret-position="272">
           <caret line="18" column="22" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
           <folding>
-            <element signature="e#0#49#0" expanded="true" />
+            <element signature="n#!!block;n#options#0;n#Highlight#0" />
+            <element signature="n#!!block;n#options#1;n#Highlight#0" />
+            <element signature="n#!!block;n#startAnimation#0;n#Highlight#0" />
+            <element signature="e#540#791#0" />
+            <element signature="e#601#730#0" />
+            <element signature="n#!!block;n#setPrimitiveProp#0;n#Highlight#0" />
+            <element signature="n#!!block;n#endAnimation#0;n#Highlight#0" />
+            <element signature="n#!!block;n#stopCallback#0;n#Highlight#0" />
+            <element signature="e#1020#1127#0" />
           </folding>
         </state>
       </provider>
@@ -539,12 +615,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/testCase.js">
+    <entry file="file://$PROJECT_DIR$/src/js/highlight/test-case/testCase.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="690">
           <caret line="75" selection-start-line="75" selection-end-line="75" />
           <folding>
-            <element signature="e#0#57#0" expanded="true" />
+            <element signature="n#!!block;n#imageUrl#0;n#Tester#0" />
+            <element signature="n#!!block;n#runTest#0;n#Tester#0" />
           </folding>
         </state>
       </provider>
@@ -590,13 +667,6 @@
     <entry file="file://$PROJECT_DIR$/webpack.release.config.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="57" selection-start-line="9" selection-start-column="57" selection-end-line="9" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
@@ -612,51 +682,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/testCaseConfig.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="10" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="10" />
-          <caret line="16" column="28" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/testCase.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-141">
-          <caret line="24" column="5" lean-forward="true" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
-          <folding>
-            <element signature="e#0#57#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/highlight/highlight.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="29" lean-forward="true" selection-start-line="21" selection-start-column="29" selection-end-line="21" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#49#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/highlight/config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="91" selection-start-line="7" selection-start-column="79" selection-end-line="7" selection-end-column="91" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/js/highlight/animations/enlarge.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="386">
+        <state relative-caret-position="918">
           <caret line="54" column="66" lean-forward="true" selection-start-line="54" selection-start-column="66" selection-end-line="54" selection-end-column="66" />
           <folding>
             <element signature="e#0#63#0" expanded="true" />
@@ -665,12 +693,77 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="1" lean-forward="true" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/highlight/config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/js/highlight/animations/changeColor">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="488">
-          <caret line="62" selection-start-line="62" selection-end-line="62" />
+        <state relative-caret-position="175">
+          <caret line="43" column="28" lean-forward="true" selection-start-line="43" selection-start-column="28" selection-end-line="43" selection-end-column="28" />
           <folding>
             <element signature="e#0#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/highlight/test-case/testCaseConfig.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="84" selection-start-line="13" selection-start-column="68" selection-end-line="13" selection-end-column="84" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="430">
+          <caret line="32" column="48" lean-forward="true" selection-start-line="32" selection-start-column="48" selection-end-line="32" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/highlight/highlight.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+          <folding>
+            <element signature="n#!!block;n#options#0;n#Highlight#0" />
+            <element signature="n#!!block;n#options#1;n#Highlight#0" />
+            <element signature="n#!!block;n#startAnimation#0;n#Highlight#0" />
+            <element signature="e#540#791#0" />
+            <element signature="e#601#730#0" />
+            <element signature="n#!!block;n#setPrimitiveProp#0;n#Highlight#0" />
+            <element signature="n#!!block;n#endAnimation#0;n#Highlight#0" />
+            <element signature="n#!!block;n#stopCallback#0;n#Highlight#0" />
+            <element signature="e#1020#1127#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/highlight/test-case/testCase.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="386">
+          <caret line="84" column="31" selection-start-line="84" selection-start-column="31" selection-end-line="84" selection-end-column="31" />
+          <caret line="85" column="31" selection-start-line="85" selection-start-column="31" selection-end-line="85" selection-end-column="31" />
+          <folding>
+            <element signature="n#!!block;n#imageUrl#0;n#Tester#0" />
+            <element signature="n#!!block;n#runTest#0;n#Tester#0" />
           </folding>
         </state>
       </provider>

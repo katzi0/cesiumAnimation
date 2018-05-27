@@ -37,7 +37,6 @@ export class Highlight {
         console.log("need to override")
     }
 
-
     stopCallback() {
         for (let key in this.pickedLabel) {
             let primitive = this.pickedLabel[key];

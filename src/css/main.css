@@ -5,3 +5,11 @@ html, body, #cesiumContainer {
 	padding: 0;
 	overflow: hidden;
 }
+
+.ddPanel {
+	margin: 30px;
+}
+.ddPanel .ddDiv {
+	margin-right: 30px;
+	display: inline-block;
+}

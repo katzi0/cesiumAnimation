@@ -8,6 +8,7 @@ export class ChangeColor extends Highlight {
         this.pickedLabel = pickedLabel;
         this.options = options;
     }
+
     get options() {
         return this._options
     }
@@ -16,7 +17,7 @@ export class ChangeColor extends Highlight {
         this._options = Object.assign({}, defaultOptions, options);
     }
 
-    get color(){
+    get color() {
         return this._color;
     }
 
@@ -31,6 +32,7 @@ export class ChangeColor extends Highlight {
     set primitiveConfig(primitiveConfig) {
         this._primitiveConfig = primitiveConfig;
     }
+
     get primitive() {
         return this.pickedLabel[this.primtiveShapeKey];
     }
@@ -49,15 +51,18 @@ export class ChangeColor extends Highlight {
         this.setAnimate();
     }
 
-    setAnimate(){
+    setAnimate() {
         const durationInSeconds = this.primitiveConfig.duration;
+        let isBlue = true;
         const interval = window.setInterval(() => {
-            this.primitive.color = Cesium.Color.fromRandom();
-            console.log(this.color);
-        }, this.primitiveConfig.timeoutInterval);
+            isBlue ? this.primitive.color = Cesium.Color.DARKRED : this.primitive.color = Cesium.Color.Blue;
+            isBlue = !isBlue;
+        }, this.primitiveConfig.timeoutInterval * 4);
         if (!this.primitiveConfig.interval) {
             window.setTimeout(() => {
-                this.primitive.color = Cesium.Color.Blue; window.clearInterval(interval)}, durationInSeconds);
+                this.primitive.color = Cesium.Color.Blue;
+                window.clearInterval(interval)
+            }, durationInSeconds);
         }
     }
 }
