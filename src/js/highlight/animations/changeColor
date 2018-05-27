@@ -1,0 +1,63 @@
+import { defaultOptions, Types } from "../config";
+import { Highlight } from "../highlight";
+import { Cesium } from '../../../index';
+
+export class ChangeColor extends Highlight {
+
+    super(pickedLabel, options) {
+        this.pickedLabel = pickedLabel;
+        this.options = options;
+    }
+    get options() {
+        return this._options
+    }
+
+    set options(options) {
+        this._options = Object.assign({}, defaultOptions, options);
+    }
+
+    get color(){
+        return this._color;
+    }
+
+    set color(color) {
+        this._color = color;
+    }
+
+    get primitiveConfig() {
+        return this._primitiveConfig;
+    }
+
+    set primitiveConfig(primitiveConfig) {
+        this._primitiveConfig = primitiveConfig;
+    }
+    get primitive() {
+        return this.pickedLabel[this.primtiveShapeKey];
+    }
+
+    set primtiveShapeKey(primtiveShapeKey) {
+        this._primtiveShapeKey = primtiveShapeKey;
+    }
+
+    get primtiveShapeKey() {
+        return this._primtiveShapeKey;
+    }
+
+    setPrimitiveProp(primtiveShapeKey) {
+        this.color = Types[primtiveShapeKey].color;
+        this.primitiveConfig = Types[primtiveShapeKey];
+        this.setAnimate();
+    }
+
+    setAnimate(){
+        const durationInSeconds = this.primitiveConfig.duration;
+        const interval = window.setInterval(() => {
+            this.primitive.color = Cesium.Color.fromRandom();
+            console.log(this.color);
+        }, this.primitiveConfig.timeoutInterval);
+        if (!this.primitiveConfig.interval) {
+            window.setTimeout(() => {
+                this.primitive.color = Cesium.Color.Blue; window.clearInterval(interval)}, durationInSeconds);
+        }
+    }
+}
