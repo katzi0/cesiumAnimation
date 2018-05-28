@@ -1,6 +1,7 @@
 import { defaultOptions, Types, AnimateType } from '../config';
 import { Cesium } from '../../../index';
 import { Highlight } from "../highlight";
+
 export class Enlarge extends Highlight {
 
     super(pickedLabel, options) {
@@ -34,6 +35,13 @@ export class Enlarge extends Highlight {
 
     get primtiveShapeKey() {
         return this._primtiveShapeKey;
+    }
+
+    set animationTypes(animationTypes) {
+        this._options.animationType = animationTypes;
+    }
+    get animationTypes() {
+        return this._options.animationType;
     }
 
     setPrimitiveProp(primtiveShapeKey) {
@@ -90,4 +98,16 @@ export class Enlarge extends Highlight {
             }, false);
         }, duration * 1000);
     };
+
+
+    addAnimationType(type) {
+        let animationTypeArr = [];
+        this.options.animationType.forEach(x => animationTypeArr.push(x));
+        animationTypeArr.push(type);
+        this.options.animationType = animationTypeArr;
+    }
+
+    removeAnimationType(selectedType){
+        this.options.animationType = this.options.animationType.filter(type =>  type !== selectedType);
+    }
 }

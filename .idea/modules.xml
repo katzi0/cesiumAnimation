@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/cesium-webpack-example.iml" filepath="$PROJECT_DIR$/.idea/cesium-webpack-example.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/cesium-animation.iml" filepath="$PROJECT_DIR$/.idea/cesium-animation.iml" />
     </modules>
   </component>
 </project>

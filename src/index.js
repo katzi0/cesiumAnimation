@@ -8,4 +8,3 @@ export const Cesium = require('cesium/Cesium');
 const viewer = new Cesium.Viewer('cesiumContainer');
 
 const test = new Tester(Cesium, viewer, []);
-test.runTest();

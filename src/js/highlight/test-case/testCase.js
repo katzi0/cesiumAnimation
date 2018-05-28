@@ -16,6 +16,7 @@ export class Tester {
         this._addDropDownEventListener();
         this._addAnimationSelectEventListener();
         this._stopAnimationEventlisteners();
+        this._addClickListener();
     }
 
     get imageUrl(){
@@ -34,15 +35,11 @@ export class Tester {
             entity.addProperty('highlight');
             entity.highlight = {
                 filterArray: entity.filterArr,
-                options: new Highlight().options,
+                // options: new Highlight().options,
                 enlarge : new Enlarge(entity),
                 changeColor: new ChangeColor(entity)
             }
         })
-    }
-
-    runTest() {
-        this._addClickListener();
     }
 
     _addClickListener() {
@@ -84,43 +81,61 @@ export class Tester {
             this.view.entities.values.forEach(entity => {
                 entity.filterArr.forEach(catagory => {
                     if(catagory.occupationFilter != undefined && catagory.occupationFilter ===  selected){
-                        switch (entity.highlight.options.animationType) {
-                            case AnimateType.shrinkGrow:
+                        entity.highlight.enlarge.options.animationType.forEach(type => {
+                            if(type ===  AnimateType.shrinkGrow)
                                 entity.highlight.enlarge.startAnimation(this.options).then(stop =>{ setTimeout(() => stop(), 5000)} );
-                                break;
-                            case AnimateType.flicker:
+                        })
+                        entity.highlight.changeColor.options.animationType.forEach(type => {
+                            if(type ===  AnimateType.flicker)
                                 entity.highlight.changeColor.startAnimation(this.options).then(stop =>{ setTimeout(() => stop(), 5000)} );
-                                break;
-                            default:
-                                entity.highlight.enlarge.startAnimation(this.options).then(stop =>{ setTimeout(() => stop(), 5000)} );
-                        }
+                        })
                     }
                 })
             })
+
         })
     }
 
     _addAnimationSelectEventListener(){
         const btnShrinkGrow=  document.getElementById('btnShrinkGrow');
         const btnFlicker=  document.getElementById('btnFlicker');
+        let isSelectedShrinkGrow = true;
+        let isSelectedFlicker = false;
+        btnShrinkGrow.style.backgroundColor = "#99ADC6";
 
         btnShrinkGrow.addEventListener('click', () => {
-            btnShrinkGrow.style.backgroundColor = "#99ADC6";
-            btnFlicker.style.backgroundColor = "";
-           this.view.entities.values.forEach(entity => {
-               entity.highlight.options.animationType = AnimateType.shrinkGrow;
-           })
+            if(!isSelectedShrinkGrow){
+                isSelectedShrinkGrow = true;
+                btnShrinkGrow.style.backgroundColor = "#99ADC6";
+                this.view.entities.values.forEach(entity => {
+                    entity.highlight.enlarge.addAnimationType(AnimateType.shrinkGrow);
+                })
+            }
+            else {
+                isSelectedShrinkGrow = false;
+                btnShrinkGrow.style.backgroundColor = "";
+                this.view.entities.values.map(entity => {
+                    entity.highlight.enlarge.removeAnimationType(AnimateType.shrinkGrow);
+                })
+            }
        })
         btnFlicker.addEventListener('click', () => {
-            btnFlicker.style.backgroundColor = "#99ADC6";
-            btnShrinkGrow.style.backgroundColor = "";
-            this.view.entities.values.forEach(entity => {
-                entity.highlight.options.animationType = AnimateType.flicker;
-            })
+            if(!isSelectedFlicker){
+                isSelectedFlicker = true;
+                btnFlicker.style.backgroundColor = "#99ADC6";
+                this.view.entities.values.forEach(entity => {
+                    entity.highlight.changeColor.addAnimationType(AnimateType.flicker);
+                })
+            }
+            else {
+                isSelectedFlicker = false;
+                btnFlicker.style.backgroundColor = "";
+                this.view.entities.values.map(entity => {
+                    entity.highlight.changeColor.removeAnimationType(AnimateType.flicker);
+                })
+            }
         })
     }
-
-
     _stopAnimationEventlisteners() {
         document.getElementById('stopAnimation').addEventListener('click', () => {
             this.entities.highlight.enlarge.stopCallback();
