@@ -2,6 +2,8 @@ import { Enlarge } from "../animations/enlarge";
 import { Cesium } from '../../../index';
 import { BillboardMocks } from "./testCaseConfig";
 import { ChangeColor } from "../animations/changeColor";
+import { AnimateType } from "../config";
+import { Highlight } from "../highlight";
 
 export class Tester {
 
@@ -12,6 +14,8 @@ export class Tester {
         this.entities = this._addEntityToEntitiesArr() || entities;
         this._initHighlight();
         this._addDropDownEventListener();
+        this._addAnimationSelectEventListener();
+        this._stopAnimationEventlisteners();
     }
 
     get imageUrl(){
@@ -20,7 +24,7 @@ export class Tester {
     }
 
     _initHighlight() {
-        this.entities.forEach(entity => {this.view.entities.add(entity);console.log(entity)});
+        this.entities.forEach(entity => {this.view.entities.add(entity)});
         this._addHighlightPropToEntity(this.view);
     }
 
@@ -30,6 +34,7 @@ export class Tester {
             entity.addProperty('highlight');
             entity.highlight = {
                 filterArray: entity.filterArr,
+                options: new Highlight().options,
                 enlarge : new Enlarge(entity),
                 changeColor: new ChangeColor(entity)
             }
@@ -71,31 +76,54 @@ export class Tester {
 
     _addDropDownEventListener(){
         let ddOccupation = document.getElementById('ddOccupation');
+        let ddSex = document.getElementById('ddSex');
+        let ddAge = document.getElementById('ddAge');
         let selected;
         ddOccupation.addEventListener('change',() => {
             selected = parseInt(ddOccupation.options[ddOccupation.selectedIndex].value);
-            // this.view.entities.values.filter(entity => {
-            //     entity.filterArr.filter(catagory => catagory.occupationFilter != undefined && catagory.occupationFilter ===  selected)
-            //         //.occupationFilter === selected
-            // })
             this.view.entities.values.forEach(entity => {
-
                 entity.filterArr.forEach(catagory => {
                     if(catagory.occupationFilter != undefined && catagory.occupationFilter ===  selected){
-                        entity.highlight.enlarge.startAnimation(this.options).then(stop =>{ setTimeout(() => stop(), 5000)} );
-                        entity.highlight.changeColor.startAnimation(this.options).then(stop =>{ setTimeout(() => stop(), 5000)} );
+                        switch (entity.highlight.options.animationType) {
+                            case AnimateType.shrinkGrow:
+                                entity.highlight.enlarge.startAnimation(this.options).then(stop =>{ setTimeout(() => stop(), 5000)} );
+                                break;
+                            case AnimateType.flicker:
+                                entity.highlight.changeColor.startAnimation(this.options).then(stop =>{ setTimeout(() => stop(), 5000)} );
+                                break;
+                            default:
+                                entity.highlight.enlarge.startAnimation(this.options).then(stop =>{ setTimeout(() => stop(), 5000)} );
+                        }
                     }
                 })
-
-                // entity.filterArr.filter(catagory => catagory.occupationFilter != undefined && catagory.occupationFilter ===  selected)
-                //.occupationFilter === selected
             })
+        })
+    }
 
-            // this.view.entities.values.forEach(entity => {
-            //     if(entity.filterArr.find(filter => filter.occupationFilter === selected)){
-            //         console.log('yay');
-            //     }
-            // })
+    _addAnimationSelectEventListener(){
+        const btnShrinkGrow=  document.getElementById('btnShrinkGrow');
+        const btnFlicker=  document.getElementById('btnFlicker');
+
+        btnShrinkGrow.addEventListener('click', () => {
+            btnShrinkGrow.style.backgroundColor = "#99ADC6";
+            btnFlicker.style.backgroundColor = "";
+           this.view.entities.values.forEach(entity => {
+               entity.highlight.options.animationType = AnimateType.shrinkGrow;
+           })
+       })
+        btnFlicker.addEventListener('click', () => {
+            btnFlicker.style.backgroundColor = "#99ADC6";
+            btnShrinkGrow.style.backgroundColor = "";
+            this.view.entities.values.forEach(entity => {
+                entity.highlight.options.animationType = AnimateType.flicker;
+            })
+        })
+    }
+
+
+    _stopAnimationEventlisteners() {
+        document.getElementById('stopAnimation').addEventListener('click', () => {
+            this.entities.highlight.enlarge.stopCallback();
         })
     }
 }

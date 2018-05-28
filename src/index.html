@@ -7,21 +7,21 @@
     <title>Cesium + Webpack</title>
 </head>
 <body>
-<!--<button id="stopAnimation">stop animatioמ</button>-->
+<button id="stopAnimation">stop animatioמ</button>
 <div class="ddPanel">
     <div class="ddDiv">
         <label>Age</label>
         <select id="ddAge">
-            <option>Under 18</option>
-            <option>18-50</option>
-            <option>51-100</option>
+            <option value="1">Under 18</option>
+            <option value="2">18-50</option>
+            <option value="3">51-100</option>
         </select>
     </div>
     <div class="ddDiv">
         <label>Sex</label>
         <select id="ddSex">
-            <option>Male</option>
-            <option>Female</option>
+            <option value="1">Male</option>
+            <option value="2">Female</option>
         </select>
     </div>
     <div class="ddDiv">
@@ -29,9 +29,14 @@
         <select id="ddOccupation">
             <option value="1">Student</option>
             <option value="2">Architect</option>
-            <option>Baker</option>
-            <option>Biomedical Engineer</option>
+            <option value="3">Baker</option>
+            <option value="4">Biomedical Engineer</option>
         </select>
+    </div>
+    <div class="ddDiv">
+        <button id="btnHiglightAll">Highlight All</button>
+        <button id="btnShrinkGrow">Shrink Grow</button>
+        <button id="btnFlicker">Flicker</button>
     </div>
 </div>
 <div id="cesiumContainer"></div>

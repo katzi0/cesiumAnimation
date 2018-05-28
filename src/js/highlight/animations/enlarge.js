@@ -1,7 +1,6 @@
 import { defaultOptions, Types, AnimateType } from '../config';
 import { Cesium } from '../../../index';
 import { Highlight } from "../highlight";
-
 export class Enlarge extends Highlight {
 
     super(pickedLabel, options) {
