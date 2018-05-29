@@ -2,8 +2,8 @@ import { Enlarge } from "../animations/enlarge";
 import { Cesium } from '../../../index';
 import { BillboardMocks } from "./testCaseConfig";
 import { ChangeColor } from "../animations/changeColor";
-import { AnimateType } from "../config";
-import { Highlight } from "../highlight";
+import { AnimateType, defaultOptions } from "../config";
+import { HighlightSelector } from "../highlightSelector";
 
 export class Tester {
 
@@ -12,6 +12,7 @@ export class Tester {
         this.cesium = cesium;
         this.options = options;
         this.entities = this._addEntityToEntitiesArr() || entities;
+        this._animationTypes = defaultOptions.animationType;
         this._initHighlight();
         this._addDropDownEventListener();
         this._addAnimationSelectEventListener();
@@ -24,6 +25,14 @@ export class Tester {
         return imageUrl;
     }
 
+    get animationTypes(){
+        return this._animationTypes;
+    }
+    set animationTypes(animationTypes) {
+        this._animationTypes = animationTypes;
+    }
+
+
     _initHighlight() {
         this.entities.forEach(entity => {this.view.entities.add(entity)});
         this._addHighlightPropToEntity(this.view);
@@ -33,12 +42,7 @@ export class Tester {
         // constraint until the project will be integrated in cesium
         viewer.entities.values.forEach(entity => {
             entity.addProperty('highlight');
-            entity.highlight = {
-                filterArray: entity.filterArr,
-                // options: new Highlight().options,
-                enlarge : new Enlarge(entity),
-                changeColor: new ChangeColor(entity)
-            }
+            entity.highlight = new HighlightSelector();
         })
     }
 
@@ -81,41 +85,67 @@ export class Tester {
             this.view.entities.values.forEach(entity => {
                 entity.filterArr.forEach(catagory => {
                     if(catagory.occupationFilter != undefined && catagory.occupationFilter ===  selected){
-                        entity.highlight.enlarge.options.animationType.forEach(type => {
-                            if(type ===  AnimateType.shrinkGrow)
-                                entity.highlight.enlarge.startAnimation(this.options).then(stop =>{ setTimeout(() => stop(), 5000)} );
-                        })
-                        entity.highlight.changeColor.options.animationType.forEach(type => {
-                            if(type ===  AnimateType.flicker)
-                                entity.highlight.changeColor.startAnimation(this.options).then(stop =>{ setTimeout(() => stop(), 5000)} );
-                        })
+                        entity.highlight(this.animationTypes, []).then(stop => {
+                            setTimeout(() => stop(), 5000)
+                        });
+
+                        // entity.highlight.enlarge.options.animationType.forEach(type => {
+                        //     if(type ===  AnimateType.shrinkGrow)
+                        //         entity.highlight.enlarge.startAnimation(this.options)
+                        // entity.highlight.changeColor.options.animationType.forEach(type => {
+                        //     if (type === AnimateType.flicker)
+                        //         entity.highlight.changeColor.startAnimation(this.options)
+                        //     else
+                        //         entity.highlight.changeColor.startAnimation(this.options, true)
+                        //         });
+                        // })
                     }
                 })
             })
-
         })
+    }
+
+    _modifyAnimationTypesArr(selectedType, add = true){
+        let arr = [];
+        if(add)
+        {
+            let index = this.animationTypes.findIndex(type => type === selectedType);
+            this.animationTypes.forEach(type => arr.push(type));
+            if(index < 0)
+                arr.push(selectedType);
+        }
+        else
+            arr = this.animationTypes.filter(type => type !== selectedType);
+        return arr;
     }
 
     _addAnimationSelectEventListener(){
         const btnShrinkGrow=  document.getElementById('btnShrinkGrow');
         const btnFlicker=  document.getElementById('btnFlicker');
         let isSelectedShrinkGrow = true;
-        let isSelectedFlicker = false;
+        let isSelectedFlicker =  true;
         btnShrinkGrow.style.backgroundColor = "#99ADC6";
+        btnFlicker.style.backgroundColor = "#99ADC6";
 
         btnShrinkGrow.addEventListener('click', () => {
             if(!isSelectedShrinkGrow){
                 isSelectedShrinkGrow = true;
                 btnShrinkGrow.style.backgroundColor = "#99ADC6";
                 this.view.entities.values.forEach(entity => {
-                    entity.highlight.enlarge.addAnimationType(AnimateType.shrinkGrow);
+                    // this.animationTypes.forEach(type => arr.push(type));
+                    // arr.push(AnimateType.shrinkGrow);
+                    this.animationTypes = this._modifyAnimationTypesArr(AnimateType.shrinkGrow, true);
+                    //
+                    // entity.highlight.enlarge.addAnimationType(AnimateType.shrinkGrow);
                 })
             }
             else {
                 isSelectedShrinkGrow = false;
                 btnShrinkGrow.style.backgroundColor = "";
                 this.view.entities.values.map(entity => {
-                    entity.highlight.enlarge.removeAnimationType(AnimateType.shrinkGrow);
+
+                    this.animationTypes = this._modifyAnimationTypesArr(AnimateType.shrinkGrow, false);
+                    // entity.highlight.enlarge.removeAnimationType(AnimateType.shrinkGrow);
                 })
             }
        })
@@ -124,18 +154,23 @@ export class Tester {
                 isSelectedFlicker = true;
                 btnFlicker.style.backgroundColor = "#99ADC6";
                 this.view.entities.values.forEach(entity => {
-                    entity.highlight.changeColor.addAnimationType(AnimateType.flicker);
+                    this.animationTypes = this._modifyAnimationTypesArr(AnimateType.flicker, true);
+                    // entity.highlight.changeColor.addAnimationType(AnimateType.flicker);
                 })
             }
             else {
                 isSelectedFlicker = false;
                 btnFlicker.style.backgroundColor = "";
                 this.view.entities.values.map(entity => {
-                    entity.highlight.changeColor.removeAnimationType(AnimateType.flicker);
+                    this.animationTypes = this._modifyAnimationTypesArr(AnimateType.flicker, false);
+                    // entity.highlight.changeColor.removeAnimationType(AnimateType.flicker);
                 })
             }
         })
     }
+
+
+
     _stopAnimationEventlisteners() {
         document.getElementById('stopAnimation').addEventListener('click', () => {
             this.entities.highlight.enlarge.stopCallback();

@@ -13,7 +13,7 @@ export const Types = {
 export const defaultOptions = {
     type: Types.label.key,
     duration: 4,//if 0, stop manually with callback
-    animationType: [AnimateType.shrinkGrow]
+    animationType: [AnimateType.shrinkGrow, AnimateType.flicker]
 };
 
 

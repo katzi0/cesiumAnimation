@@ -4,11 +4,6 @@ import { Cesium } from '../../../index';
 
 export class ChangeColor extends Highlight {
 
-    super(pickedLabel, options) {
-        this.pickedLabel = pickedLabel;
-        this.options = options;
-    }
-
     get options() {
         return this._options
     }
@@ -45,42 +40,36 @@ export class ChangeColor extends Highlight {
         return this._primtiveShapeKey;
     }
 
-    set animationTypes(animationTypes) {
-        this._options.animationType = animationTypes;
+    get duration() {
+        return this.primitiveConfig.duration;
     }
-    get animationTypes() {
-        return this._options.animationType;
-    }
-
 
     setPrimitiveProp(primtiveShapeKey) {
         this.color = Types[primtiveShapeKey].color;
         this.primitiveConfig = Types[primtiveShapeKey];
         this.setAnimate();
+        // this.setOpacity();
     }
+        setAnimate()
+        {
+            let isBlue = true;
+            const interval = window.setInterval(() => {
+                isBlue ? this.primitive.color = Cesium.Color.DARKRED : this.primitive.color = Cesium.Color.Blue;
+                isBlue = !isBlue;
+            }, this.primitiveConfig.timeoutInterval * 4);
+            if (!this.primitiveConfig.interval) {
+                window.setTimeout(() => {
+                    this.primitive.color = Cesium.Color.Blue;
+                    window.clearInterval(interval)
+                }, this.duration);
+            }
+        }
 
-    setAnimate() {
-        const durationInSeconds = this.primitiveConfig.duration;
-        let isBlue = true;
-        const interval = window.setInterval(() => {
-            isBlue ? this.primitive.color = Cesium.Color.DARKRED : this.primitive.color = Cesium.Color.Blue;
-            isBlue = !isBlue;
-        }, this.primitiveConfig.timeoutInterval * 4);
-        if (!this.primitiveConfig.interval) {
+        setOpacity()
+        {
+            this.primitive.color =  new Cesium.Color(1.0, 1.0, 1.0, 0.1);
             window.setTimeout(() => {
                 this.primitive.color = Cesium.Color.Blue;
-                window.clearInterval(interval)
-            }, durationInSeconds);
+            }, this.duration);
         }
     }
-    addAnimationType(type) {
-        let animationTypeArr = [];
-        this.options.animationType.forEach(x => animationTypeArr.push(x));
-        animationTypeArr.push(type);
-        this.options.animationType = animationTypeArr;
-    }
-
-    removeAnimationType(selectedType){
-        this.options.animationType = this.options.animationType.filter(type =>  type !== selectedType);
-    }
-}
