@@ -2,7 +2,7 @@ import { Highlight } from "../highlight";
 import { defaultOptions, Types } from "../config";
 import { Cesium } from "../../../index";
 
-export class ChangeOpacity extends Highlight{
+export class ChangeOpacity extends Highlight {
     get options() {
         return this._options
     }
@@ -48,8 +48,8 @@ export class ChangeOpacity extends Highlight{
         this.primitiveConfig = Types[primtiveShapeKey];
         this.setOpacity();
     }
-    setOpacityVer1()
-    {
+
+    setOpacityVer1() {
         let scaleStep = this.calculateEnlargeStep();
         let currentOpacity = 1;
         const interval = window.setInterval(() => {
@@ -62,8 +62,7 @@ export class ChangeOpacity extends Highlight{
         }, this.primitiveConfig.duration);
     }
 
-    setOpacity()
-    {
+    setOpacity() {
         let scaleStep = this.calculateEnlargeStep();
         let currentOpacity = 1;
         let decrease = true;
@@ -71,7 +70,7 @@ export class ChangeOpacity extends Highlight{
             if ((currentOpacity <= this.primitiveConfig.opacityEndResult && decrease) || (currentOpacity >= 1 && !decrease)) {
                 decrease = !decrease;
             }
-            currentOpacity -= decrease ? scaleStep : - scaleStep;
+            currentOpacity -= decrease ? scaleStep : -scaleStep;
             this.primitive.color = new Cesium.Color.fromAlpha(Cesium.Color[this.primitiveConfig.color], currentOpacity);//new Cesium.Color.fromHsl(1,0.583, currentOpacity);
         }, this.primitiveConfig.timeoutInterval);
         window.setTimeout(() => {

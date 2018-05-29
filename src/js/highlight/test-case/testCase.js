@@ -1,7 +1,5 @@
-import { Enlarge } from "../animations/enlarge";
 import { Cesium } from '../../../index';
 import { BillboardMocks } from "./testCaseConfig";
-import { ChangeColor } from "../animations/changeColor";
 import { AnimateType, defaultOptions } from "../config";
 import { HighlightSelector } from "../highlightSelector";
 
@@ -13,6 +11,7 @@ export class Tester {
         this.options = options;
         this.entities = this._addEntityToEntitiesArr() || entities;
         this._animationTypes = defaultOptions.animationType;
+        this.isOpacitySelected = true;
         this._initHighlight();
         this._addDropDownEventListener();
         this._addAnimationSelectEventListener();
@@ -30,6 +29,13 @@ export class Tester {
     }
     set animationTypes(animationTypes) {
         this._animationTypes = animationTypes;
+    }
+
+    get isOpacitySelected(){
+        return this._isOpacitySelected;
+    }
+    set isOpacitySelected(isOpacitySelected) {
+        this._isOpacitySelected = isOpacitySelected;
     }
 
     _initHighlight() {
@@ -88,8 +94,8 @@ export class Tester {
                             setTimeout(() => stop(), 5000)
                         });
                     }
-                    else {
-                        entity.highlight(['changeOpacity'], []).then(stop => {
+                    else if(this.isOpacitySelected) {
+                        entity.highlight([AnimateType.changeOpacity], []).then(stop => {
                             setTimeout(() => stop(), 5000)
                         });
                     }
@@ -115,10 +121,15 @@ export class Tester {
     _addAnimationSelectEventListener(){
         const btnShrinkGrow=  document.getElementById('btnShrinkGrow');
         const btnFlicker=  document.getElementById('btnFlicker');
+        const btnOpacity=  document.getElementById('btnOpacity');
+
         let isSelectedShrinkGrow = true;
         let isSelectedFlicker =  true;
+        let isSelectedOpacity =  true;
+
         btnShrinkGrow.style.backgroundColor = "#99ADC6";
         btnFlicker.style.backgroundColor = "#99ADC6";
+        btnOpacity.style.backgroundColor = "#99ADC6";
 
         btnShrinkGrow.addEventListener('click', () => {
             if(!isSelectedShrinkGrow){
@@ -152,6 +163,25 @@ export class Tester {
                 })
             }
         })
+        btnOpacity.addEventListener('click', () => {
+            if(!isSelectedOpacity){
+                isSelectedOpacity = true;
+                btnOpacity.style.backgroundColor = "#99ADC6";
+               this.isOpacitySelected = true;
+            }
+            else {
+                isSelectedOpacity = false;
+                btnOpacity.style.backgroundColor = "";
+                this.isOpacitySelected = false;
+            }
+        })
+
+
+
+
+
+
+
     }
 
     _stopAnimationEventlisteners() {
