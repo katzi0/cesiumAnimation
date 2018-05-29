@@ -10,7 +10,7 @@ export class Tester {
         this.cesium = cesium;
         this.options = options;
         this.entities = this._addEntityToEntitiesArr() || entities;
-        this._animationTypes = defaultOptions.animationType;
+        this.animationTypes = defaultOptions.animationType;
         this.isOpacitySelected = true;
         this._initHighlight();
         this._addDropDownEventListener();
@@ -19,31 +19,35 @@ export class Tester {
         this._addClickListener();
     }
 
-    get imageUrl(){
+    get imageUrl() {
         const imageUrl = 'https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png';
         return imageUrl;
     }
 
-    get animationTypes(){
+    get animationTypes() {
         return this._animationTypes;
     }
+
     set animationTypes(animationTypes) {
         this._animationTypes = animationTypes;
     }
 
-    get isOpacitySelected(){
+    get isOpacitySelected() {
         return this._isOpacitySelected;
     }
+
     set isOpacitySelected(isOpacitySelected) {
         this._isOpacitySelected = isOpacitySelected;
     }
 
     _initHighlight() {
-        this.entities.forEach(entity => {this.view.entities.add(entity)});
+        this.entities.forEach(entity => {
+            this.view.entities.add(entity)
+        });
         this._addHighlightPropToEntity(this.view);
     }
 
-    _addHighlightPropToEntity (viewer) {
+    _addHighlightPropToEntity(viewer) {
         // constraint until the project will be integrated in cesium
         viewer.entities.values.forEach(entity => {
             entity.addProperty('highlight');
@@ -55,8 +59,10 @@ export class Tester {
         this.clickListener = function (click) {
             const pickedObject = this.view.scene.pick(click.position);
             if (this.cesium.defined(pickedObject) && (pickedObject.id)) {
-                pickedObject.id.highlight.enlarge.startAnimation(this.options).then(stop =>{ setTimeout(() => stop(), 5000)} );
-                pickedObject.id.highlight.changeColor.startAnimation(this.options).then(stop =>{ setTimeout(() => stop(), 5000)} );
+                const animation = pickedObject.id.highlight;
+                animation.setup(this.animationTypes, [], pickedObject.id);
+                animation.start();
+                setTimeout(() => animation.stop(), 5000)
             }
         }
         this.handler = new this.cesium.ScreenSpaceEventHandler(this.view.scene.canvas);
@@ -70,9 +76,9 @@ export class Tester {
                 filterArr: billboard.filtersArr,
                 name: 'billboard',
                 position: this.cesium.Cartesian3.fromDegrees(billboard.position.x, billboard.position.y),
-                billboard : {
-                    image :  new Cesium.PinBuilder().fromUrl(this.imageUrl, this.cesium.Color.ROYALBLUE, 48),
-                    verticalOrigin : this.cesium.VerticalOrigin.BOTTOM
+                billboard: {
+                    image: new Cesium.PinBuilder().fromUrl(this.imageUrl, this.cesium.Color.ROYALBLUE, 48),
+                    verticalOrigin: this.cesium.VerticalOrigin.BOTTOM
                 }
             };
             entitiesMock.push(entityToPush);
@@ -80,37 +86,38 @@ export class Tester {
         return entitiesMock;
     }
 
-    _addDropDownEventListener(){
+    _addDropDownEventListener() {
         let ddOccupation = document.getElementById('ddOccupation');
         let ddSex = document.getElementById('ddSex');
         let ddAge = document.getElementById('ddAge');
         let selected;
-        ddOccupation.addEventListener('change',() => {
+        ddOccupation.addEventListener('change', () => {
             selected = parseInt(ddOccupation.options[ddOccupation.selectedIndex].value);
             this.view.entities.values.forEach(entity => {
                 entity.filterArr.forEach(catagory => {
-                    if(catagory.occupationFilter != undefined && catagory.occupationFilter ===  selected){
-                        entity.highlight(this.animationTypes, []).then(stop => {
-                            setTimeout(() => stop(), 5000)
-                        });
+                    if (catagory.occupationFilter != undefined && catagory.occupationFilter === selected) {
+                        const animation = entity.highlight;
+                        animation.setup(this.animationTypes, [], entity);
+                        animation.start();
+                        setTimeout(() => animation.stop(), 5000);
                     }
-                    else if(this.isOpacitySelected) {
-                        entity.highlight([AnimateType.changeOpacity], []).then(stop => {
-                            setTimeout(() => stop(), 5000)
-                        });
+                    else if (this.isOpacitySelected) {
+                        const animation = entity.highlight;
+                        animation.setup([AnimateType.changeOpacity], [], entity);
+                        animation.start();
+                        setTimeout(() => animation.stop(), 5000);
                     }
                 })
             })
         })
     }
 
-    _modifyAnimationTypesArr(selectedType, add = true){
+    _modifyAnimationTypesArr(selectedType, add = true) {
         let arr = [];
-        if(add)
-        {
+        if (add) {
             let index = this.animationTypes.findIndex(type => type === selectedType);
             this.animationTypes.forEach(type => arr.push(type));
-            if(index < 0)
+            if (index < 0)
                 arr.push(selectedType);
         }
         else
@@ -118,21 +125,21 @@ export class Tester {
         return arr;
     }
 
-    _addAnimationSelectEventListener(){
-        const btnShrinkGrow=  document.getElementById('btnShrinkGrow');
-        const btnFlicker=  document.getElementById('btnFlicker');
-        const btnOpacity=  document.getElementById('btnOpacity');
+    _addAnimationSelectEventListener() {
+        const btnShrinkGrow = document.getElementById('btnShrinkGrow');
+        const btnFlicker = document.getElementById('btnFlicker');
+        const btnOpacity = document.getElementById('btnOpacity');
 
         let isSelectedShrinkGrow = true;
-        let isSelectedFlicker =  true;
-        let isSelectedOpacity =  true;
+        let isSelectedFlicker = true;
+        let isSelectedOpacity = true;
 
         btnShrinkGrow.style.backgroundColor = "#99ADC6";
         btnFlicker.style.backgroundColor = "#99ADC6";
         btnOpacity.style.backgroundColor = "#99ADC6";
 
         btnShrinkGrow.addEventListener('click', () => {
-            if(!isSelectedShrinkGrow){
+            if (!isSelectedShrinkGrow) {
                 isSelectedShrinkGrow = true;
                 btnShrinkGrow.style.backgroundColor = "#99ADC6";
                 this.view.entities.values.forEach(entity => {
@@ -146,9 +153,9 @@ export class Tester {
                     this.animationTypes = this._modifyAnimationTypesArr(AnimateType.shrinkGrow, false);
                 })
             }
-       })
+        })
         btnFlicker.addEventListener('click', () => {
-            if(!isSelectedFlicker){
+            if (!isSelectedFlicker) {
                 isSelectedFlicker = true;
                 btnFlicker.style.backgroundColor = "#99ADC6";
                 this.view.entities.values.forEach(entity => {
@@ -164,10 +171,10 @@ export class Tester {
             }
         })
         btnOpacity.addEventListener('click', () => {
-            if(!isSelectedOpacity){
+            if (!isSelectedOpacity) {
                 isSelectedOpacity = true;
                 btnOpacity.style.backgroundColor = "#99ADC6";
-               this.isOpacitySelected = true;
+                this.isOpacitySelected = true;
             }
             else {
                 isSelectedOpacity = false;
@@ -175,13 +182,6 @@ export class Tester {
                 this.isOpacitySelected = false;
             }
         })
-
-
-
-
-
-
-
     }
 
     _stopAnimationEventlisteners() {

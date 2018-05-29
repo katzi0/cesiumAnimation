@@ -1,9 +1,8 @@
-import { defaultOptions, Types, AnimateType } from '../config';
-import { Cesium } from '../../../index';
 import { Highlight } from "../highlight";
+import { Cesium } from "../../../index";
+import { Types } from "../config";
 
-export class Enlarge extends Highlight {
-
+export class Jump extends Highlight {
     super(pickedLabel, options) {
         this.pickedLabel = pickedLabel;
         this.options = options;
@@ -44,62 +43,31 @@ export class Enlarge extends Highlight {
         this.setAnimate();
     }
 
-
-
-    // setAnimateWithSin() {
-    //     let increase = true;
-    //     const scalePerStep = this.calculateEnlargeStep();
-    //     const durationInSeconds = this.primitiveConfig.duration;
-    //
-    //     const startValue = 1;
-    //     const endValue = 3;
-    //     const numOfSteps = this.primitiveConfig.duration / this.primitiveConfig.timeoutInterval;
-    //     const valueIncrement = (endValue - startValue) / numOfSteps;
-    //     const sinValueIncrement = Math.PI / numOfSteps;
-    //
-    //
-    //     let currentValue = startValue;
-    //     let currentSinValue = 0;
-    //     let firstEntarnce = true;
-    //     this.scale = 0;
-    //
-    //     const interval = window.setInterval(() => {
-    //         currentSinValue += sinValueIncrement;
-    //         // currentValue += valueIncrement * (Math.sin(currentSinValue) ** 2) * 2;
-    //         if (currentSinValue < Math.PI) {
-    //             currentValue += valueIncrement * (Math.sin(currentSinValue) ** 2) * 2;
-    //             console.log(1+currentValue);
-    //             this.primitive[this.primitiveConfig.field] = currentValue;
-    //         }
-    //         else {
-    //             if(firstEntarnce){
-    //                 firstEntarnce=!firstEntarnce;
-    //                 currentSinValue = 0;
-    //                 currentValue = 0;
-    //             }
-    //             currentSinValue += sinValueIncrement;
-    //             console.log('here');
-    //             currentValue += -(valueIncrement * (Math.sin(currentSinValue) ** 2) * 2);
-    //             this.primitive[this.primitiveConfig.field] +=  -currentValue;
-    //         }
-    //
-    //     }, this.primitiveConfig.timeoutInterval);
-    //     // if (!this.primitiveConfig.interval) {
-    //     //     window.setTimeout(() => window.clearInterval(interval), durationInSeconds);
-    //     // }
-    // }
-
     setAnimate() {
         let increase = true;
         const scalePerStep = this.calculateEnlargeStep();
         const durationInSeconds = this.primitiveConfig.duration;
+
+        const startValue = 0;
+        const endValue = 1;
+        const numOfSteps = this.primitiveConfig.duration / this.primitiveConfig.timeoutInterval;
+        const valueIncrement = (endValue - startValue) / numOfSteps;
+        const sinValueIncrement = Math.PI / numOfSteps;
+
+
+        let currentValue = startValue;
+        let currentSinValue = 0;
+
         const interval = window.setInterval(() => {
-            const roundedScale = this.getRoundedScale();
-            if ((this.primitiveConfig.maxScale <= roundedScale && increase) || (this.primitiveConfig.minScale >= roundedScale && !increase)) {
-                increase = !increase;
+            currentSinValue += sinValueIncrement;
+            currentValue += valueIncrement * (Math.sin(currentSinValue) ** 2) * 2;
+            if (currentSinValue < Math.PI) {
+                this.scale = currentValue;
             }
-            this.scale += increase ? scalePerStep : -scalePerStep;
-            this.primitive[this.primitiveConfig.field] = this.scale;
+            else {
+                this.scale = endValue;
+            }
+
         }, this.primitiveConfig.timeoutInterval);
         if (!this.primitiveConfig.interval) {
             window.setTimeout(() => window.clearInterval(interval), durationInSeconds);
@@ -137,6 +105,5 @@ export class Enlarge extends Highlight {
             }, false);
         }, duration * 1000);
     };
-
 
 }

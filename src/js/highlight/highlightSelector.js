@@ -1,4 +1,4 @@
-import { ChangeColor } from "./animations/changeColor";
+import { Flicker } from "./animations/flicker";
 import { Enlarge } from "./animations/enlarge";
 import { AnimateType } from "./config";
 import { ChangeOpacity } from "./animations/changeOpacity";
@@ -6,51 +6,49 @@ import { ChangeOpacity } from "./animations/changeOpacity";
 export class HighlightSelector {
     //optionsOFALL....
 
-    constructor(options) {
+
+    constructor(animationArr, options) {
         this.options = options;
-        return this.run;
-
-    }
-    // runAnimation() {
-    //     this.enlarge ? this.enlarge.startAnimation() : {};
-    //     this.changeColor ? this.changeColor.startAnimation() : {};
-    // }
-    run(animationArr, options) {
-        animationArr.forEach(animation => {
-            this.stopCallback;
-
-            switch(animation){
-                case AnimateType.shrinkGrow:
-                    this.enlarge = new Enlarge(this);
-                    this.enlarge.startAnimation();
-                    this.stopCallback = this.enlarge.stopCallback;
-                    break;
-
-                case AnimateType.flicker:
-                    this.changeColor = new ChangeColor(this);
-                    this.changeColor.startAnimation();
-                    this.stopCallback = this.changeColor.stopCallback;
-
-                    break;
-
-                case AnimateType.changeOpacity:
-                    this.changeOpacity = new ChangeOpacity(this);
-                    this.changeOpacity.startAnimation();
-                    this.stopCallback = this.changeOpacity.stopCallback;
-
-                    break;
-
-                default:
-                    this.enlarge = new Enlarge(this);
-                    this.enlarge.startAnimation();
-                    this.stopCallback = this.enlarge.stopCallback;
-            }
-        })
-        //this.startAnimation();
-       // runAnimation();
-        return new Promise(() => (this.stopCallback));
+        // this.setup(animationArr, options)
     }
 
+    set selectedEntity(entity) {
+        this._selectedEntity = entity;
+    }
+    get selectedEntity(){
+        return this._selectedEntity;
+    }
+
+    setup(animationArr, options, entity) {
+        this.selectedEntity = entity;
+        this.animations = [];
+        if (animationArr) {
+            animationArr.forEach(animation => {
+                switch (animation) {
+                    case AnimateType.shrinkGrow:
+                        this.animations.push(new Enlarge(this.selectedEntity));
+                        break;
+                    case AnimateType.flicker:
+                        this.animations.push(new Flicker(this.selectedEntity));
+                        break;
+                    case AnimateType.changeOpacity:
+                        this.animations.push(new ChangeOpacity(this.selectedEntity));
+                        break;
+                    default:
+                        this.animations.push(new Enlarge(this.selectedEntity));
+                }
+            })
+        }
+    }
+
+    start() {
+        this.animations.forEach(animation => animation.startAnimation())
+
+    }
+
+    stop() {
+        this.animations.forEach(animation => animation.stopCallback())
+    }
 
 // {
 //     filterArray: entity.filterArr,

@@ -2,7 +2,7 @@ import { defaultOptions, Types } from "../config";
 import { Highlight } from "../highlight";
 import { Cesium } from '../../../index';
 
-export class ChangeColor extends Highlight {
+export class Flicker extends Highlight {
 
     get options() {
         return this._options
