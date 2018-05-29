@@ -1,0 +1,74 @@
+import { Highlight } from "../highlight";
+import { defaultOptions, Types } from "../config";
+import { Cesium } from "../../../index";
+
+export class ChangeOpacity extends Highlight{
+    get options() {
+        return this._options
+    }
+
+    set options(options) {
+        this._options = Object.assign({}, defaultOptions, options);
+    }
+
+    get color() {
+        return this._color;
+    }
+
+    set color(color) {
+        this._color = color;
+    }
+
+    get primitiveConfig() {
+        return this._primitiveConfig;
+    }
+
+    set primitiveConfig(primitiveConfig) {
+        this._primitiveConfig = primitiveConfig;
+    }
+
+    get primitive() {
+        return this.pickedLabel[this.primtiveShapeKey];
+    }
+
+    set primtiveShapeKey(primtiveShapeKey) {
+        this._primtiveShapeKey = primtiveShapeKey;
+    }
+
+    get primtiveShapeKey() {
+        return this._primtiveShapeKey;
+    }
+
+    get duration() {
+        return this.primitiveConfig.duration;
+    }
+
+    setPrimitiveProp(primtiveShapeKey) {
+        this.color = Types[primtiveShapeKey].color;
+        this.primitiveConfig = Types[primtiveShapeKey];
+        this.setOpacity();
+    }
+    setOpacity()
+    {
+        let scaleStep = this.calculateEnlargeStep();
+        let currentOpacity = 1;
+        const interval = window.setInterval(() => {
+            currentOpacity -= scaleStep;
+            this.primitive.color = new Cesium.Color.fromAlpha(Cesium.Color[this.primitiveConfig.color], currentOpacity);//new Cesium.Color.fromHsl(1,0.583, currentOpacity);
+        }, this.primitiveConfig.timeoutInterval);
+        window.setTimeout(() => {
+            clearInterval(interval);
+            // this.primitive.image =  new Cesium.PinBuilder().fromColor( Cesium.Color.ROYALBLUE, 48);
+            this.primitive.color = Cesium.Color[this.primitiveConfig.color];
+        }, this.primitiveConfig.duration);
+    }
+
+    calculateEnlargeStep() {
+        const durationInSeconds = this.primitiveConfig.duration;
+        const numberOfSteps = (durationInSeconds) / this.primitiveConfig.timeoutInterval;
+        const currentColor = Cesium.Color[this.primitiveConfig.color];
+        const scaleDelta = currentColor.alpha - this.primitiveConfig.opacityEndResult;
+        const scalePerStep = scaleDelta / numberOfSteps;
+        return scalePerStep;
+    }
+}

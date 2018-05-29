@@ -32,7 +32,6 @@ export class Tester {
         this._animationTypes = animationTypes;
     }
 
-
     _initHighlight() {
         this.entities.forEach(entity => {this.view.entities.add(entity)});
         this._addHighlightPropToEntity(this.view);
@@ -88,17 +87,11 @@ export class Tester {
                         entity.highlight(this.animationTypes, []).then(stop => {
                             setTimeout(() => stop(), 5000)
                         });
-
-                        // entity.highlight.enlarge.options.animationType.forEach(type => {
-                        //     if(type ===  AnimateType.shrinkGrow)
-                        //         entity.highlight.enlarge.startAnimation(this.options)
-                        // entity.highlight.changeColor.options.animationType.forEach(type => {
-                        //     if (type === AnimateType.flicker)
-                        //         entity.highlight.changeColor.startAnimation(this.options)
-                        //     else
-                        //         entity.highlight.changeColor.startAnimation(this.options, true)
-                        //         });
-                        // })
+                    }
+                    else {
+                        entity.highlight(['changeOpacity'], []).then(stop => {
+                            setTimeout(() => stop(), 5000)
+                        });
                     }
                 })
             })
@@ -132,20 +125,14 @@ export class Tester {
                 isSelectedShrinkGrow = true;
                 btnShrinkGrow.style.backgroundColor = "#99ADC6";
                 this.view.entities.values.forEach(entity => {
-                    // this.animationTypes.forEach(type => arr.push(type));
-                    // arr.push(AnimateType.shrinkGrow);
                     this.animationTypes = this._modifyAnimationTypesArr(AnimateType.shrinkGrow, true);
-                    //
-                    // entity.highlight.enlarge.addAnimationType(AnimateType.shrinkGrow);
                 })
             }
             else {
                 isSelectedShrinkGrow = false;
                 btnShrinkGrow.style.backgroundColor = "";
                 this.view.entities.values.map(entity => {
-
                     this.animationTypes = this._modifyAnimationTypesArr(AnimateType.shrinkGrow, false);
-                    // entity.highlight.enlarge.removeAnimationType(AnimateType.shrinkGrow);
                 })
             }
        })
@@ -155,7 +142,6 @@ export class Tester {
                 btnFlicker.style.backgroundColor = "#99ADC6";
                 this.view.entities.values.forEach(entity => {
                     this.animationTypes = this._modifyAnimationTypesArr(AnimateType.flicker, true);
-                    // entity.highlight.changeColor.addAnimationType(AnimateType.flicker);
                 })
             }
             else {
@@ -163,13 +149,10 @@ export class Tester {
                 btnFlicker.style.backgroundColor = "";
                 this.view.entities.values.map(entity => {
                     this.animationTypes = this._modifyAnimationTypesArr(AnimateType.flicker, false);
-                    // entity.highlight.changeColor.removeAnimationType(AnimateType.flicker);
                 })
             }
         })
     }
-
-
 
     _stopAnimationEventlisteners() {
         document.getElementById('stopAnimation').addEventListener('click', () => {
