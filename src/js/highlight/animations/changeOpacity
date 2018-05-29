@@ -48,7 +48,7 @@ export class ChangeOpacity extends Highlight{
         this.primitiveConfig = Types[primtiveShapeKey];
         this.setOpacity();
     }
-    setOpacity()
+    setOpacityVer1()
     {
         let scaleStep = this.calculateEnlargeStep();
         let currentOpacity = 1;
@@ -58,12 +58,38 @@ export class ChangeOpacity extends Highlight{
         }, this.primitiveConfig.timeoutInterval);
         window.setTimeout(() => {
             clearInterval(interval);
-            // this.primitive.image =  new Cesium.PinBuilder().fromColor( Cesium.Color.ROYALBLUE, 48);
-            this.primitive.color = Cesium.Color[this.primitiveConfig.color];
+            this.primitive.color = Cesium.Color.Blue;
+        }, this.primitiveConfig.duration);
+    }
+
+    setOpacity()
+    {
+        let scaleStep = this.calculateEnlargeStep();
+        let currentOpacity = 1;
+        let decrease = true;
+        const interval = window.setInterval(() => {
+            if ((currentOpacity <= this.primitiveConfig.opacityEndResult && decrease) || (currentOpacity >= 1 && !decrease)) {
+                decrease = !decrease;
+            }
+            currentOpacity -= decrease ? scaleStep : - scaleStep;
+            this.primitive.color = new Cesium.Color.fromAlpha(Cesium.Color[this.primitiveConfig.color], currentOpacity);//new Cesium.Color.fromHsl(1,0.583, currentOpacity);
+        }, this.primitiveConfig.timeoutInterval);
+        window.setTimeout(() => {
+            clearInterval(interval);
+            this.primitive.color = Cesium.Color.Blue;
         }, this.primitiveConfig.duration);
     }
 
     calculateEnlargeStep() {
+        const durationInSeconds = this.primitiveConfig.duration;
+        const numberOfSteps = (durationInSeconds / 2) / this.primitiveConfig.timeoutInterval;
+        const currentColor = Cesium.Color[this.primitiveConfig.color];
+        const scaleDelta = currentColor.alpha - this.primitiveConfig.opacityEndResult;
+        const scalePerStep = scaleDelta / numberOfSteps;
+        return scalePerStep;
+    }
+
+    calculateEnlargeStepVer1() {
         const durationInSeconds = this.primitiveConfig.duration;
         const numberOfSteps = (durationInSeconds) / this.primitiveConfig.timeoutInterval;
         const currentColor = Cesium.Color[this.primitiveConfig.color];
