@@ -37,14 +37,11 @@ export class Enlarge extends Highlight {
         return this._primtiveShapeKey;
     }
 
-
     setPrimitiveProp(primtiveShapeKey) {
         this.scale = Types[primtiveShapeKey].minScale;
         this.primitiveConfig = Types[primtiveShapeKey];
         this.setAnimate();
     }
-
-
 
     // setAnimateWithSin() {
     //     let increase = true;

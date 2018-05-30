@@ -43,36 +43,56 @@ export class Jump extends Highlight {
         this.setAnimate();
     }
 
+    // setAnimate() {
+    //     let increase = true;
+    //     const scalePerStep = this.calculateEnlargeStep();
+    //     const durationInSeconds = this.primitiveConfig.duration;
+    //
+    //     const startValue = 0;
+    //     const endValue = 1;
+    //     const numOfSteps = this.primitiveConfig.duration / this.primitiveConfig.timeoutInterval;
+    //     const valueIncrement = (endValue - startValue) / numOfSteps;
+    //     const sinValueIncrement = Math.PI / numOfSteps;
+    //
+    //
+    //     let currentValue = startValue;
+    //     let currentSinValue = 0;
+    //
+    //     const interval = window.setInterval(() => {
+    //         currentSinValue += sinValueIncrement;
+    //         currentValue += valueIncrement * (Math.sin(currentSinValue) ** 2) * 2;
+    //         if (currentSinValue < Math.PI) {
+    //             this.scale = currentValue;
+    //         }
+    //         else {
+    //             this.scale = endValue;
+    //         }
+    //
+    //     }, this.primitiveConfig.timeoutInterval);
+    //     if (!this.primitiveConfig.interval) {
+    //         window.setTimeout(() => window.clearInterval(interval), durationInSeconds);
+    //     }
+    // }
+
     setAnimate() {
         let increase = true;
         const scalePerStep = this.calculateEnlargeStep();
         const durationInSeconds = this.primitiveConfig.duration;
-
-        const startValue = 0;
-        const endValue = 1;
-        const numOfSteps = this.primitiveConfig.duration / this.primitiveConfig.timeoutInterval;
-        const valueIncrement = (endValue - startValue) / numOfSteps;
-        const sinValueIncrement = Math.PI / numOfSteps;
-
-
-        let currentValue = startValue;
-        let currentSinValue = 0;
-
         const interval = window.setInterval(() => {
-            currentSinValue += sinValueIncrement;
-            currentValue += valueIncrement * (Math.sin(currentSinValue) ** 2) * 2;
-            if (currentSinValue < Math.PI) {
-                this.scale = currentValue;
+            const roundedScale = this.getRoundedScale();
+            if ((this.primitiveConfig.maxScale <= roundedScale && increase) || (this.primitiveConfig.minScale >= roundedScale && !increase)) {
+                increase = !increase;
             }
-            else {
-                this.scale = endValue;
-            }
-
+            this.scale += increase ? scalePerStep : -scalePerStep;
+            let position = this.entity.position;
+            // console.log(this.entity.position._value.z);
+            // this.entity.position = new Cesium.Cartesian3.fromDegrees(-35.1641667, 70.9522222,70.9522222);
         }, this.primitiveConfig.timeoutInterval);
         if (!this.primitiveConfig.interval) {
             window.setTimeout(() => window.clearInterval(interval), durationInSeconds);
         }
     }
+
 
     calculateEnlargeStep() {
         const durationInSeconds = this.primitiveConfig.duration;

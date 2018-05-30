@@ -2,7 +2,8 @@ export const AnimateType = {
     shrinkGrow: 'shrink/grow',
     wobble: 'wobble',
     flicker: 'flicker',
-    changeOpacity: 'changeOpacity'
+    changeOpacity: 'changeOpacity',
+    jump: 'jump'
 };
 
 export const Types = {
@@ -16,7 +17,8 @@ export const Types = {
         timeoutInterval: 50,
         duration: 2000,
         color: 'LIGHTSTEELBLUE',
-        opacityEndResult: 0.3
+        opacityEndResult: 0.3,
+
     },
     label: {
         key: 'label',
@@ -40,7 +42,7 @@ export const Types = {
 
 export const defaultOptions = {
     duration: 4,//if 0, stop manually with callback
-    animationType: [AnimateType.shrinkGrow, AnimateType.flicker],
+    animationType: [AnimateType.shrinkGrow, AnimateType.flicker, AnimateType.jump],
     color: Types.billboard.color
 };
 

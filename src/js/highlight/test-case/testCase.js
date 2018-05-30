@@ -59,6 +59,22 @@ export class Tester {
         this.clickListener = function (click) {
             const pickedObject = this.view.scene.pick(click.position);
             if (this.cesium.defined(pickedObject) && (pickedObject.id)) {
+                console.log(this.cesium.Math.toDegrees(this.view.scene.camera.pitch));
+                let pitch = this.cesium.Math.toDegrees(this.view.scene.camera.pitch);
+
+
+                let post = pickedObject.primitive.position;
+                let cart = this.cesium.Cartographic.fromCartesian(post);
+                let newPos = this.cesium.Cartesian3.fromDegrees(cart.longitude, cart.latitude, 1000);
+                pickedObject.id.position = newPos;
+
+                /*
+                    if pitch > 60
+                    change y
+
+                    else
+                    change z
+                 */
                 const animation = pickedObject.id.highlight;
                 animation.setup(this.animationTypes, [], pickedObject.id);
                 animation.start();
@@ -88,7 +104,6 @@ export class Tester {
 
     _addDropDownEventListener() {
         let ddOccupation = document.getElementById('ddOccupation');
-        let ddSex = document.getElementById('ddSex');
         let ddAge = document.getElementById('ddAge');
         let selected;
         ddOccupation.addEventListener('change', () => {
@@ -97,6 +112,7 @@ export class Tester {
                 entity.filterArr.forEach(catagory => {
                     if (catagory.occupationFilter != undefined && catagory.occupationFilter === selected) {
                         const animation = entity.highlight;
+                        debugger;
                         animation.setup(this.animationTypes, [], entity);
                         animation.start();
                         setTimeout(() => animation.stop(), 5000);
@@ -186,7 +202,7 @@ export class Tester {
 
     _stopAnimationEventlisteners() {
         document.getElementById('stopAnimation').addEventListener('click', () => {
-            this.entities.highlight.enlarge.stopCallback();
+            this.entities.highlight.stop();
         })
     }
 }

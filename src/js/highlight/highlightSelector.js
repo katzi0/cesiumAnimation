@@ -2,6 +2,7 @@ import { Flicker } from "./animations/flicker";
 import { Enlarge } from "./animations/enlarge";
 import { AnimateType } from "./config";
 import { ChangeOpacity } from "./animations/changeOpacity";
+import { Jump } from "./animations/jump";
 
 export class HighlightSelector {
     //optionsOFALL....
@@ -33,6 +34,9 @@ export class HighlightSelector {
                         break;
                     case AnimateType.changeOpacity:
                         this.animations.push(new ChangeOpacity(this.selectedEntity));
+                        break;
+                    case AnimateType.jump:
+                        this.animations.push(new Jump(this.selectedEntity));
                         break;
                     default:
                         this.animations.push(new Enlarge(this.selectedEntity));
