@@ -6,14 +6,7 @@ export class Jump extends Highlight {
     super(pickedLabel, options) {
         this.pickedLabel = pickedLabel;
         this.options = options;
-    }
-
-    get scale() {
-        return this._scale;
-    }
-
-    set scale(scale) {
-        this._scale = scale;
+        this.isMouseClickDetected = false;
     }
 
     get primitiveConfig() {
@@ -36,7 +29,6 @@ export class Jump extends Highlight {
         return this._primtiveShapeKey;
     }
 
-
     setPrimitiveProp(primtiveShapeKey) {
         this.scale = Types[primtiveShapeKey].minScale;
         this.primitiveConfig = Types[primtiveShapeKey];
@@ -50,6 +42,31 @@ export class Jump extends Highlight {
     get windowCoordinates() {
         return this._windowCoordinates;
     }
+
+    set intervalId(intervalId) {
+        this._intervalId = intervalId;
+    }
+
+    get intervalId() {
+        return this._intervalId;
+    }
+
+    set originPosition(originPosition) {
+        this._originPosition = originPosition;
+    }
+
+    get originPosition() {
+        return this._originPosition;
+    }
+
+    set isMouseClickDetected(isMouseClickDetected) {
+        this._isMouseClickDetected = isMouseClickDetected;
+    }
+
+    get isMouseClickDetected() {
+        return this._isMouseClickDetected;
+    }
+
 
     // setAnimate() {
     //     let increase = true;
@@ -83,21 +100,25 @@ export class Jump extends Highlight {
     // }
 
     setAnimate() {
-
-        //_value isnt good approach to get data...
         this.windowCoordinates = Cesium.SceneTransforms.wgs84ToWindowCoordinates(Viewer.scene, this.entity.position._value);
-        const originPosition = this.entity.position._value;
-        //windowCoordinates .y -= 50;
-        // let ct3 = this.cesium.Cartesian3.fromDegrees(ct2.x, ct2.y);
-        //    let cartesainFromWindowCoordinates = Viewer.camera.pickEllipsoid(windowCoordinates);
-        //  this.entity.position = cartesainFromWindowCoordinates ? cartesainFromWindowCoordinates : this.entity.position._value;
-
+        this.originPosition = this.entity.position._value;
         let increase = true;
+        let isDetected = false;
         const scalePerStep = this.calculateEnlargeStep();
         const durationInSeconds = this.primitiveConfig.duration;
         const maxWindowCoordinateHeight = this.windowCoordinates.y - this.primitiveConfig.jumpMaxHeight;
         const interval = window.setInterval(() => {
-            const roundedScale = this.getRoundedScale();
+            this.intervalId = interval;
+            if (!isDetected) {
+                isDetected = !isDetected;
+                this.detectMouseClickHandler();
+            }
+
+            if (this.isMouseClickDetected) {
+                window.clearInterval(this.intervalId);
+                this.entity.position = this.originPosition;
+            }
+
             if ((this.windowCoordinates.y <= maxWindowCoordinateHeight)) {
                 increase = !increase;
             }
@@ -108,28 +129,34 @@ export class Jump extends Highlight {
             this.entity.position = cartesainFromWindowCoordinates ? cartesainFromWindowCoordinates : this.entity.position._value;
         }, this.primitiveConfig.timeoutInterval);
         if (!this.primitiveConfig.interval) {
-            window.setTimeout(() => {window.clearInterval(interval);
-                if (originPosition !== this.entity.position._value) {
-                    this.entity.position = originPosition;
+            window.setTimeout(() => {
+                document.getElementById('cesiumContainer').removeEventListener('onmousemove', () => {
+                });
+                window.clearInterval(interval);
+                if (this.originPosition !== this.entity.position._value) {
+                    this.entity.position = this.originPosition;
                 }
             }, durationInSeconds);
         }
     }
 
-
     calculateEnlargeStep() {
         const durationInSeconds = this.primitiveConfig.duration;
         const numberOfSteps = (durationInSeconds / 2) / this.primitiveConfig.timeoutInterval;
-        const currentScale = this.windowCoordinates.y;
-        // const destinatedScale = this.primitiveConfig.jumpMaxHeight;
-        // const scaleDelta = destinatedScale - currentScale;
         const scalePerStep = -this.primitiveConfig.jumpMaxHeight / numberOfSteps;
         return scalePerStep;
     }
 
-    getRoundedScale() {
-        const roundedCondition = Number(this.scale);
-        return parseFloat(roundedCondition.toFixed(3));
+    detectMouseClickHandler() {
+        const jumpScope = this;
+        const mouseHandler = document.getElementById('cesiumContainer');
+        mouseHandler.onmousemove = this.stopAnimationAfterMouseEvent.bind(jumpScope);
+    }
+
+    stopAnimationAfterMouseEvent() {
+        document.getElementById('cesiumContainer').removeEventListener('onmousemove',this.stopAnimationAfterMouseEvent);
+        this.isMouseClickDetected = true;
+        console.log('yay')
     }
 
     endAnimation(entity, primitive, duration = 0, type, obj) {
