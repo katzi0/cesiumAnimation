@@ -6,7 +6,6 @@ export class Jump extends Highlight {
     super(pickedLabel, options) {
         this.pickedLabel = pickedLabel;
         this.options = options;
-        this.isMouseClickDetected = false;
     }
 
     get primitiveConfig() {
@@ -100,6 +99,7 @@ export class Jump extends Highlight {
     // }
 
     setAnimate() {
+        this.isMouseClickDetected = false;
         this.windowCoordinates = Cesium.SceneTransforms.wgs84ToWindowCoordinates(Viewer.scene, this.entity.position._value);
         this.originPosition = this.entity.position._value;
         let increase = true;
@@ -156,7 +156,7 @@ export class Jump extends Highlight {
     stopAnimationAfterMouseEvent() {
         document.getElementById('cesiumContainer').removeEventListener('onmousemove',this.stopAnimationAfterMouseEvent);
         this.isMouseClickDetected = true;
-        console.log('yay')
+       // console.log('yay')
     }
 
     endAnimation(entity, primitive, duration = 0, type, obj) {
@@ -175,5 +175,4 @@ export class Jump extends Highlight {
             }, false);
         }, duration * 1000);
     };
-
 }

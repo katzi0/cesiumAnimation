@@ -59,7 +59,7 @@ export class Tester {
         this.clickListener = function (click) {
             const pickedObject = this.view.scene.pick(click.position);
             if (this.cesium.defined(pickedObject) && (pickedObject.id)) {
-                console.log(this.cesium.Math.toDegrees(this.view.scene.camera.pitch));
+              //  console.log(this.cesium.Math.toDegrees(this.view.scene.camera.pitch));
 
                 //
                 // let pitch = this.cesium.Math.toDegrees(this.view.scene.camera.pitch);
@@ -160,7 +160,9 @@ export class Tester {
         const btnShrinkGrow = document.getElementById('btnShrinkGrow');
         const btnFlicker = document.getElementById('btnFlicker');
         const btnOpacity = document.getElementById('btnOpacity');
+        const btnJump = document.getElementById('btnJump');
 
+        let isSelectedBtnJump = false;
         let isSelectedShrinkGrow = true;
         let isSelectedFlicker = true;
         let isSelectedOpacity = true;
@@ -182,6 +184,22 @@ export class Tester {
                 btnShrinkGrow.style.backgroundColor = "";
                 this.view.entities.values.map(entity => {
                     this.animationTypes = this._modifyAnimationTypesArr(AnimateType.shrinkGrow, false);
+                })
+            }
+        })
+        btnJump.addEventListener('click', () => {
+            if (!isSelectedBtnJump) {
+                isSelectedBtnJump = true;
+                btnJump.style.backgroundColor = "#99ADC6";
+                this.view.entities.values.forEach(entity => {
+                    this.animationTypes = this._modifyAnimationTypesArr(AnimateType.jump, true);
+                })
+            }
+            else {
+                isSelectedShrinkGrow = false;
+                btnJump.style.backgroundColor = "";
+                this.view.entities.values.map(entity => {
+                    this.animationTypes = this._modifyAnimationTypesArr(AnimateType.jump, false);
                 })
             }
         })

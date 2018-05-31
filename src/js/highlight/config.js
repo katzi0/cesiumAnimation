@@ -43,7 +43,7 @@ export const Types = {
 
 export const defaultOptions = {
     duration: 4,//if 0, stop manually with callback
-    animationType: [AnimateType.shrinkGrow, AnimateType.flicker, AnimateType.jump],
+    animationType: [AnimateType.shrinkGrow, AnimateType.flicker],
     color: Types.billboard.color
 };
 
