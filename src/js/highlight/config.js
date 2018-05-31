@@ -18,6 +18,7 @@ export const Types = {
         duration: 2000,
         color: 'LIGHTSTEELBLUE',
         opacityEndResult: 0.3,
+        jumpMaxHeight: 50,
 
     },
     label: {

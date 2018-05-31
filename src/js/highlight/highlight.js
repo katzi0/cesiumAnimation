@@ -19,7 +19,7 @@ export class Highlight {
         this._options = Object.assign({}, defaultOptions, options);
     }
 
-    startAnimation(options) {
+    startAnimation() {
         return new Promise((resolve, reject) => {
             for (let primtiveShapeKey in this.pickedLabel) {
                 this.primtiveShapeKey = primtiveShapeKey;

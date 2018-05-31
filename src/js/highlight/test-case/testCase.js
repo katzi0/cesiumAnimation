@@ -60,21 +60,37 @@ export class Tester {
             const pickedObject = this.view.scene.pick(click.position);
             if (this.cesium.defined(pickedObject) && (pickedObject.id)) {
                 console.log(this.cesium.Math.toDegrees(this.view.scene.camera.pitch));
-                let pitch = this.cesium.Math.toDegrees(this.view.scene.camera.pitch);
+
+                //
+                // let pitch = this.cesium.Math.toDegrees(this.view.scene.camera.pitch);
+                // let post = pickedObject.primitive.position;
+                // let cart = this.cesium.Cartographic.fromCartesian(post);
+                // let newPos = this.cesium.Cartesian3.fromDegrees(cart.longitude, cart.latitude, 1000);
+
+                //
 
 
-                let post = pickedObject.primitive.position;
-                let cart = this.cesium.Cartographic.fromCartesian(post);
-                let newPos = this.cesium.Cartesian3.fromDegrees(cart.longitude, cart.latitude, 1000);
-                pickedObject.id.position = newPos;
+                //working test
+               //  let ct2 = this.cesium.SceneTransforms.wgs84ToWindowCoordinates(this.view.scene, pickedObject.primitive.position);
+               //   ct2.y -= 50;
+               // // let ct3 = this.cesium.Cartesian3.fromDegrees(ct2.x, ct2.y);
+               //  let cartesain3Position = this.view.camera.pickEllipsoid(ct2);
+               //  pickedObject.id.position = cartesain3Position ? cartesain3Position : pickedObject.primitive.position;
+
 
                 /*
                     if pitch > 60
                     change y
 
-                    else
+                    elsedebugger
                     change z
                  */
+
+
+
+
+
+
                 const animation = pickedObject.id.highlight;
                 animation.setup(this.animationTypes, [], pickedObject.id);
                 animation.start();
@@ -112,7 +128,6 @@ export class Tester {
                 entity.filterArr.forEach(catagory => {
                     if (catagory.occupationFilter != undefined && catagory.occupationFilter === selected) {
                         const animation = entity.highlight;
-                        debugger;
                         animation.setup(this.animationTypes, [], entity);
                         animation.start();
                         setTimeout(() => animation.stop(), 5000);

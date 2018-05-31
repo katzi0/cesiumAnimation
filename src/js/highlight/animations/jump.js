@@ -1,5 +1,5 @@
 import { Highlight } from "../highlight";
-import { Cesium } from "../../../index";
+import { Cesium, Viewer } from "../../../index";
 import { Types } from "../config";
 
 export class Jump extends Highlight {
@@ -43,6 +43,14 @@ export class Jump extends Highlight {
         this.setAnimate();
     }
 
+    set windowCoordinates(windowCoordinates) {
+        this._windowCoordinates = windowCoordinates;
+    }
+
+    get windowCoordinates() {
+        return this._windowCoordinates;
+    }
+
     // setAnimate() {
     //     let increase = true;
     //     const scalePerStep = this.calculateEnlargeStep();
@@ -75,21 +83,36 @@ export class Jump extends Highlight {
     // }
 
     setAnimate() {
+
+        //_value isnt good approach to get data...
+        this.windowCoordinates = Cesium.SceneTransforms.wgs84ToWindowCoordinates(Viewer.scene, this.entity.position._value);
+        const originPosition = this.entity.position._value;
+        //windowCoordinates .y -= 50;
+        // let ct3 = this.cesium.Cartesian3.fromDegrees(ct2.x, ct2.y);
+        //    let cartesainFromWindowCoordinates = Viewer.camera.pickEllipsoid(windowCoordinates);
+        //  this.entity.position = cartesainFromWindowCoordinates ? cartesainFromWindowCoordinates : this.entity.position._value;
+
         let increase = true;
         const scalePerStep = this.calculateEnlargeStep();
         const durationInSeconds = this.primitiveConfig.duration;
+        const maxWindowCoordinateHeight = this.windowCoordinates.y - this.primitiveConfig.jumpMaxHeight;
         const interval = window.setInterval(() => {
             const roundedScale = this.getRoundedScale();
-            if ((this.primitiveConfig.maxScale <= roundedScale && increase) || (this.primitiveConfig.minScale >= roundedScale && !increase)) {
+            if ((this.windowCoordinates.y <= maxWindowCoordinateHeight)) {
                 increase = !increase;
             }
-            this.scale += increase ? scalePerStep : -scalePerStep;
-            let position = this.entity.position;
-            // console.log(this.entity.position._value.z);
-            // this.entity.position = new Cesium.Cartesian3.fromDegrees(-35.1641667, 70.9522222,70.9522222);
+            let y = this.windowCoordinates.y;
+            y += increase ? scalePerStep : -scalePerStep;
+            this.windowCoordinates = {x: this.windowCoordinates.x, y};
+            let cartesainFromWindowCoordinates = Viewer.camera.pickEllipsoid(this.windowCoordinates);
+            this.entity.position = cartesainFromWindowCoordinates ? cartesainFromWindowCoordinates : this.entity.position._value;
         }, this.primitiveConfig.timeoutInterval);
         if (!this.primitiveConfig.interval) {
-            window.setTimeout(() => window.clearInterval(interval), durationInSeconds);
+            window.setTimeout(() => {window.clearInterval(interval);
+                if (originPosition !== this.entity.position._value) {
+                    this.entity.position = originPosition;
+                }
+            }, durationInSeconds);
         }
     }
 
@@ -97,14 +120,14 @@ export class Jump extends Highlight {
     calculateEnlargeStep() {
         const durationInSeconds = this.primitiveConfig.duration;
         const numberOfSteps = (durationInSeconds / 2) / this.primitiveConfig.timeoutInterval;
-        const currentScale = this.primitiveConfig.minScale;
-        const destinatedScale = this.primitiveConfig.maxScale;
-        const scaleDelta = destinatedScale - currentScale;
-        const scalePerStep = scaleDelta / numberOfSteps;
+        const currentScale = this.windowCoordinates.y;
+        // const destinatedScale = this.primitiveConfig.jumpMaxHeight;
+        // const scaleDelta = destinatedScale - currentScale;
+        const scalePerStep = -this.primitiveConfig.jumpMaxHeight / numberOfSteps;
         return scalePerStep;
     }
 
-    getRoundedScale(){
+    getRoundedScale() {
         const roundedCondition = Number(this.scale);
         return parseFloat(roundedCondition.toFixed(3));
     }

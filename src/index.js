@@ -5,6 +5,6 @@ require('./css/main.css');
 
 export const Cesium = require('cesium/Cesium');
 
-const viewer = new Cesium.Viewer('cesiumContainer');
+export const Viewer = new Cesium.Viewer('cesiumContainer');
 
-const test = new Tester(Cesium, viewer, []);
+const test = new Tester(Cesium, Viewer, []);
