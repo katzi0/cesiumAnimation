@@ -69,44 +69,18 @@ export class Tester {
             if (this.cesium.defined(pickedObject) && (pickedObject.id)) {
                 //  console.log(this.cesium.Math.toDegrees(this.view.scene.camera.pitch));
 
-                //
-                // let pitch = this.cesium.Math.toDegrees(this.view.scene.camera.pitch);
-                // let post = pickedObject.primitive.position;
-                // let cart = this.cesium.Cartographic.fromCartesian(post);
-                // let newPos = this.cesium.Cartesian3.fromDegrees(cart.longitude, cart.latitude, 1000);
-
-                //
-
-
-                //working test
-                //  let ct2 = this.cesium.SceneTransforms.wgs84ToWindowCoordinates(this.view.scene, pickedObject.primitive.position);
-                //   ct2.y -= 50;
-                // // let ct3 = this.cesium.Cartesian3.fromDegrees(ct2.x, ct2.y);
-                //  let cartesain3Position = this.view.camera.pickEllipsoid(ct2);
-                //  pickedObject.id.position = cartesain3Position ? cartesain3Position : pickedObject.primitive.position;
-
-
-                /*
-                    if pitch > 60
-                    change y
-
-                    elsedebugger
-                    change z
-                 */
-
-
                 this.singleHighlightPrimitve = pickedObject.id.highlight;
                 this.singleHighlightPrimitve.setup([AnimateType.IndicationEnlarge], {indicationOnly: true}, pickedObject.id);
                 this.singleHighlightPrimitve.start();
             }
             else {
                 const cartesian = this.view.scene.pickPosition(click.position);
-                const entity =  this.view.entities.add({
-                    filterArr: [{occupationFilter: Math.floor(Math.random() * Math.ceil(5)) }],
+                const entity = this.view.entities.add({
+                    filterArr: [{occupationFilter: Math.floor(Math.random() * Math.ceil(5))}],
                     name: 'billboard',
                     position: cartesian,
                     billboard: {
-                        scale : 0,
+                        scale: 0,
                         image: new Cesium.PinBuilder().fromUrl('images/user.svg', this.cesium.Color.ROYALBLUE, 60),
                         verticalOrigin: this.cesium.VerticalOrigin.BOTTOM
                     }
@@ -166,13 +140,13 @@ export class Tester {
                 entity.filterArr.forEach(catagory => {
                     if (catagory.occupationFilter != undefined && catagory.occupationFilter === selected) {
                         const animation = entity.highlight;
-                        animation.setup(this.animationTypes, [], entity);
+                        animation.setup(this.animationTypes, {indicationOnly: false}, entity);
                         animation.start();
                         // setTimeout(() => animation.stop(), 5000);
                     }
                     else if (this.isOpacitySelected) {
                         const animation = entity.highlight;
-                        animation.setup([AnimateType.changeOpacity], [], entity);
+                        animation.setup([AnimateType.changeOpacity], {indicationOnly: false}, entity);
                         animation.start();
                         setTimeout(() => animation.stop(), 5000);
                     }

@@ -1,6 +1,6 @@
 import { Flicker } from "./animations/flicker";
 import { Enlarge } from "./animations/enlarge";
-import { AnimateType, Types } from "./config";
+import { AnimateType, defaultOptions } from "./config";
 import { ChangeOpacity } from "./animations/changeOpacity";
 import { Jump } from "./animations/jump";
 import { Cesium } from "../../index";
@@ -11,7 +11,7 @@ export class HighlightSelector {
 
 
     constructor(animationArr, options) {
-        this.options = options;
+        this.options = Object.assign({},defaultOptions, options);
         this.pickedPrimitve = {};
         // this.setup(animationArr, options)
     }
@@ -29,14 +29,6 @@ export class HighlightSelector {
 
     set scale(scale) {
         this._scale = scale;
-    }
-
-    get primitiveConfig() {
-        return this._primitiveConfig;
-    }
-
-    set primitiveConfig(primitiveConfig) {
-        this._primitiveConfig = primitiveConfig;
     }
 
     get options() {
@@ -64,7 +56,7 @@ export class HighlightSelector {
     }
 
     setup(animationArr, options, entity) {
-
+        this.options = Object.assign({},defaultOptions, options);
         this.selectedEntity = entity;
         let helperArr = [];
         if (animationArr) {
@@ -102,9 +94,9 @@ export class HighlightSelector {
             this.stop();
         this.inervalId = window.setInterval(() => {
             this.animations.forEach(animation => animation.startAnimation())
-        }, this.primitiveConfig.timeoutInterval);
-        if (!this.primitiveConfig.interval || this.primitiveConfig.indicationOnly) {
-            window.setTimeout(() => window.clearInterval(this.inervalId), this.primitiveConfig.duration);
+        }, this.options.timeoutInterval);
+        if (!this.options.interval || this.options.indicationOnly) {
+            window.setTimeout(() => window.clearInterval(this.inervalId), this.options.duration);
         }
     }
 
@@ -123,9 +115,9 @@ export class HighlightSelector {
             this.pickedPrimitve.billboard = selectedEntity.billboard;
     };
 
-    setPrimitiveProp(primtiveShapeKey) {
-        this.scale = Types[primtiveShapeKey].minScale;
-        this.primitiveConfig = Types[primtiveShapeKey];
+    setPrimitiveProp() {
+        this.scale = this.options.minScale;
+        // this.options = Types[primtiveShapeKey];
     }
 
 // {

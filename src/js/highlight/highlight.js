@@ -1,4 +1,4 @@
-import { defaultOptions, Types } from "./config";
+import { defaultOptions } from "./config";
 import { Cesium } from "../../index";
 
 
