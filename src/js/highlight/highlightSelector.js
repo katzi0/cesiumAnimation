@@ -72,6 +72,7 @@ export class HighlightSelector {
                         helperArr.push(new Flicker(this.selectedEntity));
                         break;
                     case AnimateType.changeOpacity:
+                        debugger;
                         helperArr.push(new ChangeOpacity(this.selectedEntity));
                         break;
                     case AnimateType.jump:
@@ -96,14 +97,16 @@ export class HighlightSelector {
             this.animations.forEach(animation => animation.startAnimation())
         }, this.options.timeoutInterval);
         if (!this.options.interval || this.options.indicationOnly) {
-            window.setTimeout(() => window.clearInterval(this.inervalId), this.options.duration);
+            window.setTimeout(() => this.stop(), this.options.duration);
         }
     }
 
     stop() {
         window.clearInterval(this.inervalId);
-        if(this.animations)
+        if(this.animations){
             this.animations.forEach(animation => animation.stopCallback());
+        }
+
     }
 
     setDefinedPrimitivesInEntity(selectedEntity) {
@@ -117,12 +120,5 @@ export class HighlightSelector {
 
     setPrimitiveProp() {
         this.scale = this.options.minScale;
-        // this.options = Types[primtiveShapeKey];
     }
-
-// {
-//     filterArray: entity.filterArr,
-//     enlarge : new Enlarge(entity),
-//     changeColor: new ChangeColor(entity)
-// }
 }

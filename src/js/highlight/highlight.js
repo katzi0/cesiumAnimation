@@ -23,9 +23,8 @@ export class Highlight {
         return new Promise((resolve, reject) => {
             for (let primtiveShapeKey in this.pickedLabel) {
                 this.primtiveShapeKey = primtiveShapeKey;
-                this.setPrimitiveProp(primtiveShapeKey)
+                this.setPrimitiveProp();
             }
-
             // resolve(this.stopCallback.bind(this));
         })
     }

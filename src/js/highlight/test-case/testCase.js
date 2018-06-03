@@ -140,16 +140,18 @@ export class Tester {
                 entity.filterArr.forEach(catagory => {
                     if (catagory.occupationFilter != undefined && catagory.occupationFilter === selected) {
                         const animation = entity.highlight;
-                        animation.setup(this.animationTypes, {indicationOnly: false}, entity);
+                        // animation.setup(this.animationTypes, {indicationOnly: false}, entity);
+                        // animation.setup(this.animationTypes, {indicationOnly: false, duration: 5000}, entity);
+                        animation.setup(this.animationTypes, {indicationOnly: false, interval: true}, entity);
                         animation.start();
                         // setTimeout(() => animation.stop(), 5000);
                     }
-                    else if (this.isOpacitySelected) {
-                        const animation = entity.highlight;
-                        animation.setup([AnimateType.changeOpacity], {indicationOnly: false}, entity);
-                        animation.start();
-                        setTimeout(() => animation.stop(), 5000);
-                    }
+                    // else if (this.isOpacitySelected) {
+                    //     const animation = entity.highlight;
+                    //     animation.setup([AnimateType.changeOpacity], {indicationOnly: false}, entity);
+                    //     animation.start();
+                    //     setTimeout(() => animation.stop(), 5000);
+                    // }
                 })
             })
         })

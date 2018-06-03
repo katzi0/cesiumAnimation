@@ -1,14 +1,18 @@
 import { Highlight } from "../highlight";
-import { defaultOptions, Types } from "../config";
 import { Cesium } from "../../../index";
 
 export class ChangeOpacity extends Highlight {
+
+    super(pickedLabel, options) {
+        this.pickedLabel = pickedLabel;
+        this.options = options;
+    }
     get options() {
         return this._options
     }
 
     set options(options) {
-        this._options = Object.assign({}, defaultOptions, options);
+        this._options = options;
     }
 
     get color() {
@@ -19,33 +23,13 @@ export class ChangeOpacity extends Highlight {
         this._color = color;
     }
 
-    get primitiveConfig() {
-        return this._primitiveConfig;
-    }
-
-    set primitiveConfig(primitiveConfig) {
-        this._primitiveConfig = primitiveConfig;
-    }
 
     get primitive() {
-        return this.pickedLabel[this.primtiveShapeKey];
+        return this.pickedLabel[this.options.primitiveType];
     }
 
-    set primtiveShapeKey(primtiveShapeKey) {
-        this._primtiveShapeKey = primtiveShapeKey;
-    }
-
-    get primtiveShapeKey() {
-        return this._primtiveShapeKey;
-    }
-
-    get duration() {
-        return this.primitiveConfig.duration;
-    }
 
     setPrimitiveProp(primtiveShapeKey) {
-        this.color = Types[primtiveShapeKey].color;
-        this.primitiveConfig = Types[primtiveShapeKey];
         this.setOpacity();
     }
 
@@ -79,20 +63,24 @@ export class ChangeOpacity extends Highlight {
         // }, this.primitiveConfig.duration);
     }
 
+    stopCallback() {
+        this.primitive.color = Cesium.Color.Blue;
+    }
+
     calculateEnlargeStep() {
-        const durationInSeconds = this.primitiveConfig.duration;
-        const numberOfSteps = (durationInSeconds / 2) / this.primitiveConfig.timeoutInterval;
-        const currentColor = Cesium.Color[this.primitiveConfig.color];
-        const scaleDelta = currentColor.alpha - this.primitiveConfig.opacityEndResult;
+        const durationInSeconds = this.options.duration;
+        const numberOfSteps = (durationInSeconds / 2) / this.options.timeoutInterval;
+        const currentColor = Cesium.Color[this.options.color];
+        const scaleDelta = currentColor.alpha - this.options.opacityEndResult;
         const scalePerStep = scaleDelta / numberOfSteps;
         return scalePerStep;
     }
 
     calculateEnlargeStepVer1() {
-        const durationInSeconds = this.primitiveConfig.duration;
-        const numberOfSteps = (durationInSeconds) / this.primitiveConfig.timeoutInterval;
-        const currentColor = Cesium.Color[this.primitiveConfig.color];
-        const scaleDelta = currentColor.alpha - this.primitiveConfig.opacityEndResult;
+        const durationInSeconds = this.options.duration;
+        const numberOfSteps = (durationInSeconds) / this.options.timeoutInterval;
+        const currentColor = Cesium.Color[this.options.color];
+        const scaleDelta = currentColor.alpha - this.options.opacityEndResult;
         const scalePerStep = scaleDelta / numberOfSteps;
         return scalePerStep;
     }

@@ -23,14 +23,6 @@ export class Enlarge extends Highlight {
         this._increase = increase;
     }
 
-    get primitiveConfig() {
-        return this._primitiveConfig;
-    }
-
-    set primitiveConfig(primitiveConfig) {
-        this._primitiveConfig = primitiveConfig;
-    }
-
     get primitive() {
         return this.pickedLabel[this.primtiveShapeKey];
     }
@@ -43,10 +35,7 @@ export class Enlarge extends Highlight {
         return this._primtiveShapeKey;
     }
 
-    setPrimitiveProp(primtiveShapeKey) {
-        // this.scale = Types[primtiveShapeKey].minScale;
-        // debugger;
-        // this.primitiveConfig = Types[primtiveShapeKey];
+    setPrimitiveProp() {
         this.setAnimate();
     }
 
@@ -166,7 +155,6 @@ export class Enlarge extends Highlight {
 
     stopCallback() {
         this.pickedLabel[this.options.primitiveType][this.options.field] = 1;
-        // this.primitive[this.primitiveConfig.field] = this.primitiveConfig.minScale;
     }
 
     easeInOutCubic(t) {
