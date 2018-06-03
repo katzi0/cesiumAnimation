@@ -1,9 +1,12 @@
+import { IndicationEnlarge } from "./animations/indicationEnlarge";
+
 export const AnimateType = {
     shrinkGrow: 'shrink/grow',
     wobble: 'wobble',
     flicker: 'flicker',
     changeOpacity: 'changeOpacity',
-    jump: 'jump'
+    jump: 'jump',
+    IndicationEnlarge: 'IndicationEnlarge'
 };
 
 export const Types = {
@@ -19,6 +22,7 @@ export const Types = {
         color: 'LIGHTSTEELBLUE',
         opacityEndResult: 0.3,
         jumpMaxHeight: 50,
+        indicationOnly: true
 
     },
     label: {

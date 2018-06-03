@@ -41,7 +41,7 @@ export class Tester {
     }
 
     set singleHighlightPrimitve(singleHighlightPrimitve) {
-        this._singleHighlightPrimitve;
+        this._singleHighlightPrimitve = singleHighlightPrimitve;
     }
 
     get singleHighlightPrimitve() {
@@ -95,10 +95,26 @@ export class Tester {
                  */
 
 
-                this._singleHighlightPrimitve = pickedObject.id.highlight;
-                this._singleHighlightPrimitve.setup(this.animationTypes, [], pickedObject.id);
-                this._singleHighlightPrimitve.start();
-                // setTimeout(() => animation.stop(), 5000)
+                this.singleHighlightPrimitve = pickedObject.id.highlight;
+                this.singleHighlightPrimitve.setup([AnimateType.IndicationEnlarge], {indicationOnly: true}, pickedObject.id);
+                this.singleHighlightPrimitve.start();
+            }
+            else {
+                const cartesian = this.view.scene.pickPosition(click.position);
+                const entity =  this.view.entities.add({
+                    filterArr: [{occupationFilter: Math.floor(Math.random() * Math.ceil(5)) }],
+                    name: 'billboard',
+                    position: cartesian,
+                    billboard: {
+                        scale : 0,
+                        image: new Cesium.PinBuilder().fromUrl('images/user.svg', this.cesium.Color.ROYALBLUE, 60),
+                        verticalOrigin: this.cesium.VerticalOrigin.BOTTOM
+                    }
+                })
+                entity.addProperty('highlight');
+                entity.highlight = new HighlightSelector();
+                entity.highlight.setup([AnimateType.IndicationEnlarge], {indicationOnly: true}, entity);
+                entity.highlight.start();
             }
         }
         this.handler = new this.cesium.ScreenSpaceEventHandler(this.view.scene.canvas);
@@ -256,9 +272,9 @@ export class Tester {
 
     _stopAnimationEventlisteners() {
 
-        if (this._singleHighlightPrimitve) {
-            this._singleHighlightPrimitve.stop();
-            this._singleHighlightPrimitve = null;
+        if (this.singleHighlightPrimitve) {
+            this.singleHighlightPrimitve.stop();
+            this.singleHighlightPrimitve = null;
         }
         else {
             document.getElementById('stopAnimation').addEventListener('click', () => {

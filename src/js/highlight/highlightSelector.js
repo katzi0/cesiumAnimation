@@ -4,6 +4,7 @@ import { AnimateType, Types } from "./config";
 import { ChangeOpacity } from "./animations/changeOpacity";
 import { Jump } from "./animations/jump";
 import { Cesium } from "../../index";
+import { IndicationEnlarge } from "./animations/indicationEnlarge";
 
 export class HighlightSelector {
     //optionsOFALL....
@@ -72,6 +73,9 @@ export class HighlightSelector {
                     case AnimateType.shrinkGrow:
                         helperArr.push(new Enlarge(this.selectedEntity));
                         break;
+                    case AnimateType.IndicationEnlarge:
+                        helperArr.push(new IndicationEnlarge(this.selectedEntity));
+                        break;
                     case AnimateType.flicker:
                         helperArr.push(new Flicker(this.selectedEntity));
                         break;
@@ -99,14 +103,13 @@ export class HighlightSelector {
         this.inervalId = window.setInterval(() => {
             this.animations.forEach(animation => animation.startAnimation())
         }, this.primitiveConfig.timeoutInterval);
-        if (!this.primitiveConfig.interval) {
+        if (!this.primitiveConfig.interval || this.primitiveConfig.indicationOnly) {
             window.setTimeout(() => window.clearInterval(this.inervalId), this.primitiveConfig.duration);
         }
     }
 
     stop() {
         window.clearInterval(this.inervalId);
-        console.log('here');
         if(this.animations)
             this.animations.forEach(animation => animation.stopCallback());
     }
