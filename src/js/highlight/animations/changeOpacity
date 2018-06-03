@@ -66,17 +66,17 @@ export class ChangeOpacity extends Highlight {
         let scaleStep = this.calculateEnlargeStep();
         let currentOpacity = 1;
         let decrease = true;
-        const interval = window.setInterval(() => {
+        // const interval = window.setInterval(() => {
             if ((currentOpacity <= this.primitiveConfig.opacityEndResult && decrease) || (currentOpacity >= 1 && !decrease)) {
                 decrease = !decrease;
             }
             currentOpacity -= decrease ? scaleStep : -scaleStep;
             this.primitive.color = new Cesium.Color.fromAlpha(Cesium.Color[this.primitiveConfig.color], currentOpacity);//new Cesium.Color.fromHsl(1,0.583, currentOpacity);
-        }, this.primitiveConfig.timeoutInterval);
-        window.setTimeout(() => {
-            clearInterval(interval);
-            this.primitive.color = Cesium.Color.Blue;
-        }, this.primitiveConfig.duration);
+        // }, this.primitiveConfig.timeoutInterval);
+        // window.setTimeout(() => {
+        //     clearInterval(interval);
+        //     this.primitive.color = Cesium.Color.Blue;
+        // }, this.primitiveConfig.duration);
     }
 
     calculateEnlargeStep() {

@@ -40,6 +40,14 @@ export class Tester {
         this._isOpacitySelected = isOpacitySelected;
     }
 
+    set singleHighlightPrimitve(singleHighlightPrimitve) {
+        this._singleHighlightPrimitve;
+    }
+
+    get singleHighlightPrimitve() {
+        return this._singleHighlightPrimitve;
+    }
+
     _initHighlight() {
         this.entities.forEach(entity => {
             this.view.entities.add(entity)
@@ -59,7 +67,7 @@ export class Tester {
         this.clickListener = function (click) {
             const pickedObject = this.view.scene.pick(click.position);
             if (this.cesium.defined(pickedObject) && (pickedObject.id)) {
-              //  console.log(this.cesium.Math.toDegrees(this.view.scene.camera.pitch));
+                //  console.log(this.cesium.Math.toDegrees(this.view.scene.camera.pitch));
 
                 //
                 // let pitch = this.cesium.Math.toDegrees(this.view.scene.camera.pitch);
@@ -71,11 +79,11 @@ export class Tester {
 
 
                 //working test
-               //  let ct2 = this.cesium.SceneTransforms.wgs84ToWindowCoordinates(this.view.scene, pickedObject.primitive.position);
-               //   ct2.y -= 50;
-               // // let ct3 = this.cesium.Cartesian3.fromDegrees(ct2.x, ct2.y);
-               //  let cartesain3Position = this.view.camera.pickEllipsoid(ct2);
-               //  pickedObject.id.position = cartesain3Position ? cartesain3Position : pickedObject.primitive.position;
+                //  let ct2 = this.cesium.SceneTransforms.wgs84ToWindowCoordinates(this.view.scene, pickedObject.primitive.position);
+                //   ct2.y -= 50;
+                // // let ct3 = this.cesium.Cartesian3.fromDegrees(ct2.x, ct2.y);
+                //  let cartesain3Position = this.view.camera.pickEllipsoid(ct2);
+                //  pickedObject.id.position = cartesain3Position ? cartesain3Position : pickedObject.primitive.position;
 
 
                 /*
@@ -87,14 +95,10 @@ export class Tester {
                  */
 
 
-
-
-
-
-                const animation = pickedObject.id.highlight;
-                animation.setup(this.animationTypes, [], pickedObject.id);
-                animation.start();
-                setTimeout(() => animation.stop(), 5000)
+                this._singleHighlightPrimitve = pickedObject.id.highlight;
+                this._singleHighlightPrimitve.setup(this.animationTypes, [], pickedObject.id);
+                this._singleHighlightPrimitve.start();
+                // setTimeout(() => animation.stop(), 5000)
             }
         }
         this.handler = new this.cesium.ScreenSpaceEventHandler(this.view.scene.canvas);
@@ -104,15 +108,33 @@ export class Tester {
     _addEntityToEntitiesArr() {
         let entitiesMock = [];
         BillboardMocks.forEach(billboard => {
-            let entityToPush = {
-                filterArr: billboard.filtersArr,
-                name: 'billboard',
-                position: this.cesium.Cartesian3.fromDegrees(billboard.position.x, billboard.position.y),
-                billboard: {
-                    image: new Cesium.PinBuilder().fromUrl(this.imageUrl, this.cesium.Color.ROYALBLUE, 48),
-                    verticalOrigin: this.cesium.VerticalOrigin.BOTTOM
-                }
-            };
+            let entityToPush;
+            if (billboard.pinBuilder) {
+                entityToPush = {
+                    filterArr: billboard.filtersArr,
+                    name: 'billboard',
+                    position: this.cesium.Cartesian3.fromDegrees(billboard.position.x, billboard.position.y),
+                    billboard: {
+                        image: new Cesium.PinBuilder().fromUrl('images/user.svg', this.cesium.Color.ROYALBLUE, 60),
+                        verticalOrigin: this.cesium.VerticalOrigin.BOTTOM
+                    }
+                };
+            }
+            else {
+                entityToPush = {
+                    filterArr: billboard.filtersArr,
+                    name: 'billboard',
+                    position: this.cesium.Cartesian3.fromDegrees(billboard.position.x, billboard.position.y),
+                    billboard: {
+                        image: 'images/man-user.svg',
+                        verticalOrigin: this.cesium.VerticalOrigin.BOTTOM,
+                        width: 25,
+                        height: 25
+
+                    }
+                };
+            }
+
             entitiesMock.push(entityToPush);
         })
         return entitiesMock;
@@ -130,7 +152,7 @@ export class Tester {
                         const animation = entity.highlight;
                         animation.setup(this.animationTypes, [], entity);
                         animation.start();
-                        setTimeout(() => animation.stop(), 5000);
+                        // setTimeout(() => animation.stop(), 5000);
                     }
                     else if (this.isOpacitySelected) {
                         const animation = entity.highlight;
@@ -164,11 +186,10 @@ export class Tester {
 
         let isSelectedBtnJump = false;
         let isSelectedShrinkGrow = true;
-        let isSelectedFlicker = true;
+        let isSelectedFlicker = false;
         let isSelectedOpacity = true;
 
         btnShrinkGrow.style.backgroundColor = "#99ADC6";
-        btnFlicker.style.backgroundColor = "#99ADC6";
         btnOpacity.style.backgroundColor = "#99ADC6";
 
         btnShrinkGrow.addEventListener('click', () => {
@@ -234,9 +255,18 @@ export class Tester {
     }
 
     _stopAnimationEventlisteners() {
-        document.getElementById('stopAnimation').addEventListener('click', () => {
-            this.entities.highlight.stop();
-        })
+
+        if (this._singleHighlightPrimitve) {
+            this._singleHighlightPrimitve.stop();
+            this._singleHighlightPrimitve = null;
+        }
+        else {
+            document.getElementById('stopAnimation').addEventListener('click', () => {
+                this.view.entities.values.forEach(entity => {
+                    entity.highlight.stop();
+                })
+            })
+        }
     }
 }
 

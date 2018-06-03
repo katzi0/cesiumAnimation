@@ -13,9 +13,9 @@ export const Types = {
         maxScale: 1.5,
         minScale: 1,
         currentScale: 1,
-        interval: false,
-        timeoutInterval: 50,
-        duration: 2000,
+        interval: true,
+        timeoutInterval: 16,
+        duration: 1000,
         color: 'LIGHTSTEELBLUE',
         opacityEndResult: 0.3,
         jumpMaxHeight: 50,
@@ -43,7 +43,7 @@ export const Types = {
 
 export const defaultOptions = {
     duration: 4,//if 0, stop manually with callback
-    animationType: [AnimateType.shrinkGrow, AnimateType.flicker],
+    animationType: [AnimateType.shrinkGrow],
     color: Types.billboard.color
 };
 

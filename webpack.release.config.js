@@ -71,8 +71,10 @@ module.exports = [{
         new CopyWebpackPlugin([{from: path.join(cesiumSource, cesiumWorkers), to: 'Workers'}]),
         new CopyWebpackPlugin([{from: path.join(cesiumSource, 'Assets'), to: 'Assets'}]),
         new CopyWebpackPlugin([{from: path.join(cesiumSource, 'Widgets'), to: 'Widgets'}]),
+        new CopyWebpackPlugin([ { from: 'src/Assets/images', to: 'images' } ]),
+
         new webpack.DefinePlugin({
-            // Define relative base path in cesium for loading assets
+            // Define relative base path in cesium for loading Assets
             CESIUM_BASE_URL: JSON.stringify('')
         }),
         // Uglify js files

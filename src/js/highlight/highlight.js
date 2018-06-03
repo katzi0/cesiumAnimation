@@ -25,7 +25,8 @@ export class Highlight {
                 this.primtiveShapeKey = primtiveShapeKey;
                 this.setPrimitiveProp(primtiveShapeKey)
             }
-            resolve(this.stopCallback.bind(this));
+
+            // resolve(this.stopCallback.bind(this));
         })
     }
 
@@ -38,10 +39,11 @@ export class Highlight {
     }
 
     stopCallback() {
-        for (let key in this.pickedLabel) {
-            let primitive = this.pickedLabel[key];
-            primitive[Types[key].field] = 1;
-        }
+        console.log("need to override")
+        // for (let key in this.pickedLabel) {
+        //     let primitive = this.pickedLabel[key];
+        //     primitive[Types[key].field] = 1;
+        // }
     }
 
     setDefinedPrimitivesInEntity() {
