@@ -28,10 +28,7 @@ export class Highlight {
         //     // resolve(this.stopCallback.bind(this));
         // })
 
-        for (let primtiveShapeKey in this.pickedLabel) {
-            this.primtiveShapeKey = primtiveShapeKey;
-            this.setPrimitiveProp();
-        }
+        this.setPrimitiveProp();
     }
 
     setPrimitiveProp(primtiveShapeKey) {

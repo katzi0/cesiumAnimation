@@ -5,18 +5,9 @@ import { IndicationEnlarge } from "./animations/indicationEnlarge";
 
 export class HighlightSelector {
     //optionsOFALL....
-
-
     constructor(animationArr, options) {
         this.options = Object.assign({},defaultOptions, options);
         this.pickedPrimitve = {};
-    }
-
-    get inervalId() {
-        return this._intervalId;
-    }
-    set inervalId(intervalId) {
-        this._intervalId = intervalId;
     }
 
     get scale() {
@@ -76,18 +67,6 @@ export class HighlightSelector {
         }
     }
 
-    // start() {
-    //     if(this.inervalId)
-    //         this.stop();
-    //     this.inervalId = window.setInterval(() => {
-    //         this.animations.forEach(animation => animation.startAnimation())
-    //     }, this.options.timeoutInterval);
-    //     if (!this.options.interval || this.options.indicationOnly) {
-    //         window.setTimeout(() => this.stop(), this.options.duration);
-    //     }
-    // }
-
-
     start() {
         this.animations.forEach(animation => animation.startAnimation());
         if(!this.options.interval || this.options.indicationOnly){
@@ -101,7 +80,6 @@ export class HighlightSelector {
         if(this.animations){
             this.animations.forEach(animation => animation.stopCallback());
         }
-
     }
 
     setDefinedPrimitivesInEntity(selectedEntity) {

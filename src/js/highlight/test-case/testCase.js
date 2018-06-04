@@ -14,7 +14,6 @@ export class Tester {
         this.isOpacitySelected = true;
         this._initHighlight();
         this._addDropDownEventListener();
-        // this._addAnimationSelectEventListener();
         this._stopAnimationEventlisteners();
         this._addClickListener();
     }
@@ -67,8 +66,6 @@ export class Tester {
         this.clickListener = function (click) {
             const pickedObject = this.view.scene.pick(click.position);
             if (this.cesium.defined(pickedObject) && (pickedObject.id)) {
-                //  console.log(this.cesium.Math.toDegrees(this.view.scene.camera.pitch));
-
                 this.singleHighlightPrimitve = pickedObject.id.highlight;
                 this.singleHighlightPrimitve.setup([AnimateType.IndicationEnlarge], {indicationOnly: true}, pickedObject.id);
                 this.singleHighlightPrimitve.start();
@@ -155,103 +152,8 @@ export class Tester {
                         animation.start();
                         // setTimeout(() => animation.stop(), 5000);
                     }
-                    // else if (this.isOpacitySelected) {
-                    //     const animation = entity.highlight;
-                    //     animation.setup([AnimateType.changeOpacity], {indicationOnly: false}, entity);
-                    //     animation.start();
-                    //     setTimeout(() => animation.stop(), 5000);
-                    // }
                 })
             })
-        })
-    }
-
-    _modifyAnimationTypesArr(selectedType, add = true) {
-        let arr = [];
-        if (add) {
-            let index = this.animationTypes.findIndex(type => type === selectedType);
-            this.animationTypes.forEach(type => arr.push(type));
-            if (index < 0)
-                arr.push(selectedType);
-        }
-        else
-            arr = this.animationTypes.filter(type => type !== selectedType);
-        return arr;
-    }
-
-    _addAnimationSelectEventListener() {
-        const btnShrinkGrow = document.getElementById('btnShrinkGrow');
-        const btnFlicker = document.getElementById('btnFlicker');
-        const btnOpacity = document.getElementById('btnOpacity');
-        const btnJump = document.getElementById('btnJump');
-
-        let isSelectedBtnJump = false;
-        let isSelectedShrinkGrow = true;
-        let isSelectedFlicker = false;
-        let isSelectedOpacity = true;
-
-        btnShrinkGrow.style.backgroundColor = "#99ADC6";
-        btnOpacity.style.backgroundColor = "#99ADC6";
-
-        btnShrinkGrow.addEventListener('click', () => {
-            if (!isSelectedShrinkGrow) {
-                isSelectedShrinkGrow = true;
-                btnShrinkGrow.style.backgroundColor = "#99ADC6";
-                this.view.entities.values.forEach(entity => {
-                    this.animationTypes = this._modifyAnimationTypesArr(AnimateType.shrinkGrow, true);
-                })
-            }
-            else {
-                isSelectedShrinkGrow = false;
-                btnShrinkGrow.style.backgroundColor = "";
-                this.view.entities.values.map(entity => {
-                    this.animationTypes = this._modifyAnimationTypesArr(AnimateType.shrinkGrow, false);
-                })
-            }
-        })
-        btnJump.addEventListener('click', () => {
-            if (!isSelectedBtnJump) {
-                isSelectedBtnJump = true;
-                btnJump.style.backgroundColor = "#99ADC6";
-                this.view.entities.values.forEach(entity => {
-                    this.animationTypes = this._modifyAnimationTypesArr(AnimateType.jump, true);
-                })
-            }
-            else {
-                isSelectedShrinkGrow = false;
-                btnJump.style.backgroundColor = "";
-                this.view.entities.values.map(entity => {
-                    this.animationTypes = this._modifyAnimationTypesArr(AnimateType.jump, false);
-                })
-            }
-        })
-        btnFlicker.addEventListener('click', () => {
-            if (!isSelectedFlicker) {
-                isSelectedFlicker = true;
-                btnFlicker.style.backgroundColor = "#99ADC6";
-                this.view.entities.values.forEach(entity => {
-                    this.animationTypes = this._modifyAnimationTypesArr(AnimateType.flicker, true);
-                })
-            }
-            else {
-                isSelectedFlicker = false;
-                btnFlicker.style.backgroundColor = "";
-                this.view.entities.values.map(entity => {
-                    this.animationTypes = this._modifyAnimationTypesArr(AnimateType.flicker, false);
-                })
-            }
-        })
-        btnOpacity.addEventListener('click', () => {
-            if (!isSelectedOpacity) {
-                isSelectedOpacity = true;
-                btnOpacity.style.backgroundColor = "#99ADC6";
-                this.isOpacitySelected = true;
-            }
-            else {
-                isSelectedOpacity = false;
-                btnOpacity.style.backgroundColor = "";
-                this.isOpacitySelected = false;
-            }
         })
     }
 
