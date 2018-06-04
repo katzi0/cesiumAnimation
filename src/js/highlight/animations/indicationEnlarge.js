@@ -1,4 +1,5 @@
 import { Highlight } from "../highlight";
+import { Cesium } from '../../../index';
 
 export class IndicationEnlarge extends Highlight {
 
@@ -39,19 +40,34 @@ export class IndicationEnlarge extends Highlight {
         this.setAnimate();
     }
 
+
     setAnimate() {
         const scalePerStep = this.calculateEnlargeStep();
-
-        this.scaleSum = this.scaleSum ? this.scaleSum + scalePerStep : scalePerStep;
-        console.log(this.scaleSum);
-        if (this.scaleSum >= 1) {
-            this.stopIncrease = true;
-        }
         if (!this.stopIncrease) {
-            this.scale = this.easeInElastic(this.scaleSum);
-            this.primitive[this.options.field] = this.scale;
+            this.primitive[this.options.field] = new Cesium.CallbackProperty(() => {
+                this.scaleSum = this.scaleSum ? this.scaleSum + scalePerStep : scalePerStep;
+                if (this.scaleSum >= 1) {
+                    return 1;
+                }
+                return Cesium.EasingFunction.ELASTIC_OUT(this.scaleSum);
+            },true)
         }
     }
+
+
+
+    // setAnimate() {
+    //     const scalePerStep = this.calculateEnlargeStep();
+    //
+    //     this.scaleSum = this.scaleSum ? this.scaleSum + scalePerStep : scalePerStep;
+    //     if (this.scaleSum >= 1) {
+    //         this.stopIncrease = true;
+    //     }
+    //     if (!this.stopIncrease) {
+    //         this.scale = Cesium.EasingFunction.ELASTIC_OUT(this.scaleSum);//this.easeInElastic(this.scaleSum);
+    //         this.primitive[this.options.field] = this.scale;
+    //     }
+    // }
 
     calculateEnlargeStep() {
         const durationInSeconds = this.options.duration;

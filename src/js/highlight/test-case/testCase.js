@@ -14,7 +14,7 @@ export class Tester {
         this.isOpacitySelected = true;
         this._initHighlight();
         this._addDropDownEventListener();
-        this._addAnimationSelectEventListener();
+        // this._addAnimationSelectEventListener();
         this._stopAnimationEventlisteners();
         this._addClickListener();
     }
@@ -151,7 +151,7 @@ export class Tester {
                         // if(entity.billboard.scale._value > 1){
                         //     animation.setup(this.animationTypes, {indicationOnly: false, interval: true, minScale: entity.billboard.scale._value}, entity);
                         // }
-                        animation.setup(this.animationTypes, {indicationOnly: false, interval: false, scalePercent: 0.9}, entity);
+                        animation.setup(this.animationTypes, {indicationOnly: false, interval: true, scalePercent: 0.9}, entity);
                         animation.start();
                         // setTimeout(() => animation.stop(), 5000);
                     }

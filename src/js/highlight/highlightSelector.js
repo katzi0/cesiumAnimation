@@ -1,8 +1,5 @@
-import { Flicker } from "./animations/flicker";
 import { Enlarge } from "./animations/enlarge";
 import { AnimateType, defaultOptions } from "./config";
-import { ChangeOpacity } from "./animations/changeOpacity";
-import { Jump } from "./animations/jump";
 import { Cesium } from "../../index";
 import { IndicationEnlarge } from "./animations/indicationEnlarge";
 
@@ -13,7 +10,6 @@ export class HighlightSelector {
     constructor(animationArr, options) {
         this.options = Object.assign({},defaultOptions, options);
         this.pickedPrimitve = {};
-        // this.setup(animationArr, options)
     }
 
     get inervalId() {
@@ -68,17 +64,8 @@ export class HighlightSelector {
                     case AnimateType.IndicationEnlarge:
                         helperArr.push(new IndicationEnlarge(this.selectedEntity, this.options));
                         break;
-                    case AnimateType.flicker:
-                        helperArr.push(new Flicker(this.selectedEntity));
-                        break;
-                    case AnimateType.changeOpacity:
-                        helperArr.push(new ChangeOpacity(this.selectedEntity));
-                        break;
-                    case AnimateType.jump:
-                        helperArr.push(new Jump(this.selectedEntity));
-                        break;
                     default:
-                        helperArr.push(new Enlarge(this.selectedEntity));
+                        helperArr.push(new Enlarge(this.selectedEntity, this.options));
                 }
             })
             this.animations = helperArr;
@@ -89,15 +76,20 @@ export class HighlightSelector {
         }
     }
 
+    // start() {
+    //     if(this.inervalId)
+    //         this.stop();
+    //     this.inervalId = window.setInterval(() => {
+    //         this.animations.forEach(animation => animation.startAnimation())
+    //     }, this.options.timeoutInterval);
+    //     if (!this.options.interval || this.options.indicationOnly) {
+    //         window.setTimeout(() => this.stop(), this.options.duration);
+    //     }
+    // }
+
+
     start() {
-        if(this.inervalId)
-            this.stop();
-        this.inervalId = window.setInterval(() => {
-            this.animations.forEach(animation => animation.startAnimation())
-        }, this.options.timeoutInterval);
-        if (!this.options.interval || this.options.indicationOnly) {
-            window.setTimeout(() => this.stop(), this.options.duration);
-        }
+        this.animations.forEach(animation => animation.startAnimation());
     }
 
     stop() {
@@ -109,10 +101,6 @@ export class HighlightSelector {
     }
 
     setDefinedPrimitivesInEntity(selectedEntity) {
-        if (Cesium.defined(selectedEntity.polyline))
-            this.pickedPrimitve.polyline = selectedEntity.polyline;
-        if (Cesium.defined(selectedEntity.label))
-            this.pickedPrimitve.label = selectedEntity.label;
         if (Cesium.defined(selectedEntity.billboard))
             this.pickedPrimitve.billboard = selectedEntity.billboard;
     };

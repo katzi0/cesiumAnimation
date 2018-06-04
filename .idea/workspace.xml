@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6521a61b-de4e-4678-9558-e5356e02625b" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/js/highlight/animations/enlarge.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/highlight/animations/enlarge.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/js/highlight/animations/indicationEnlarge.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/highlight/animations/indicationEnlarge.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/highlight/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/highlight/config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/js/highlight/highlightSelector.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/highlight/highlightSelector.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/js/highlight/test-case/testCase.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/highlight/test-case/testCase.js" afterDir="false" />
     </list>
@@ -18,13 +17,35 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DockManager">
+    <window id="3">
+      <content type="file-editors">
+        <state>
+          <leaf>
+            <file pinned="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/src/js/highlight/animations/jump.js">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="561">
+                    <caret line="162" column="25" lean-forward="true" selection-start-line="162" selection-start-column="25" selection-end-line="162" selection-end-column="25" />
+                    <folding>
+                      <element signature="e#0#41#0" expanded="true" />
+                    </folding>
+                  </state>
+                </provider>
+              </entry>
+            </file>
+          </leaf>
+        </state>
+      </content>
+    </window>
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/js/highlight/highlightSelector.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="301">
-              <caret line="68" column="82" selection-start-line="68" selection-start-column="82" selection-end-line="68" selection-end-column="82" />
+            <state relative-caret-position="346">
+              <caret line="91" column="63" selection-start-line="91" selection-start-column="63" selection-end-line="91" selection-end-column="63" />
               <folding>
                 <element signature="e#0#47#0" expanded="true" />
               </folding>
@@ -35,8 +56,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/js/highlight/test-case/testCase.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="491">
-              <caret line="156" column="21" lean-forward="true" selection-start-line="156" selection-start-column="21" selection-end-line="156" selection-end-column="21" />
+            <state relative-caret-position="240">
+              <caret line="18" column="12" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="12" />
               <folding>
                 <element signature="e#0#40#0" expanded="true" />
                 <element signature="n#!!block;n#animationTypes#0;n#Tester#0" />
@@ -46,28 +67,52 @@
                 <element signature="n#!!block;n#_initHighlight#0;n#Tester#0" />
                 <element signature="n#!!block;n#_addClickListener#0;n#Tester#0" />
                 <element signature="n#!!block;n#_modifyAnimationTypesArr#0;n#Tester#0" />
-                <marker date="1528099143704" expanded="true" signature="5969:6201" ph="..." />
-                <marker date="1528099143704" expanded="true" signature="5971:6201" ph="..." />
+                <element signature="n#!!block;n#_addAnimationSelectEventListener#0;n#Tester#0" />
+                <element signature="e#7936#8614#0" />
+                <marker date="1528101038866" expanded="true" signature="5972:6204" ph="..." />
+                <marker date="1528101038866" expanded="true" signature="5974:6204" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/js/highlight/config.js">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="53" column="20" selection-start-line="53" selection-start-column="20" selection-end-line="53" selection-end-column="20" />
+            <state relative-caret-position="153">
+              <caret line="9" column="20" lean-forward="true" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/js/highlight/animations/jump.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="578">
+              <caret line="163" column="43" selection-start-line="163" selection-start-column="43" selection-end-line="163" selection-end-column="43" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/js/highlight/config.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="425">
+              <caret line="55" column="20" lean-forward="true" selection-start-line="55" selection-start-column="20" selection-end-line="55" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/js/highlight/animations/indicationEnlarge.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="343">
-              <caret line="63" column="28" lean-forward="true" selection-start-line="63" selection-start-column="28" selection-end-line="63" selection-end-column="28" />
+            <state relative-caret-position="391">
+              <caret line="55" lean-forward="true" selection-start-line="55" selection-end-line="55" />
               <folding>
+                <element signature="e#0#41#0" expanded="true" />
                 <element signature="n#!!block;n#stopIncrease#0;n#IndicationEnlarge#0" />
               </folding>
             </state>
@@ -77,14 +122,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/js/highlight/animations/enlarge.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="160" lean-forward="true" selection-start-line="160" selection-end-line="160" />
+            <state relative-caret-position="986">
+              <caret line="66" column="5" lean-forward="true" selection-start-line="66" selection-start-column="5" selection-end-line="66" selection-end-column="5" />
               <folding>
                 <element signature="n#!!block;n#scale#0;n#Enlarge#0" />
                 <element signature="n#!!block;n#scale#1;n#Enlarge#0" />
                 <element signature="n#!!block;n#primtiveShapeKey#0;n#Enlarge#0" />
                 <element signature="n#!!block;n#primtiveShapeKey#1;n#Enlarge#0" />
-                <element signature="n#!!block;n#easeInOutSin#0;n#Enlarge#0" />
               </folding>
             </state>
           </provider>
@@ -93,10 +137,24 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/js/highlight/highlight.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
+            <state relative-caret-position="114">
+              <caret line="25" column="27" selection-start-line="25" selection-start-column="27" selection-end-line="25" selection-end-column="27" />
               <folding>
                 <element signature="e#0#42#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="374">
+              <caret line="28" column="7" lean-forward="true" selection-start-line="28" selection-start-column="7" selection-end-line="28" selection-end-column="7" />
+              <folding>
+                <element signature="n#head#0;n#html#0;n#!!top" />
+                <element signature="n#meta#2;n#head#0;n#html#0;n#!!top" />
+                <marker date="1528099552446" expanded="true" signature="680:950" ph="..." />
               </folding>
             </state>
           </provider>
@@ -106,10 +164,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>.add</find>
-      <find>setInputAction</find>
-      <find>highlight</find>
-      <find>prop</find>
       <find>cartesian</find>
       <find>carte</find>
       <find>defaultOptions</find>
@@ -136,6 +190,10 @@
       <find>this.view.entities</find>
       <find>calculateEnlargeStep</find>
       <find>debugger</find>
+      <find>_addAnimationSelectEventListener</find>
+      <find>CallbackProperty</find>
+      <find>new Cesium.CallbackProperty</find>
+      <find>Cesium</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -157,17 +215,17 @@
         <option value="$PROJECT_DIR$/src/js/highlight/animations/flicker.js" />
         <option value="$PROJECT_DIR$/src/index.js" />
         <option value="$PROJECT_DIR$/src/js/highlight/animations/jump.js" />
-        <option value="$PROJECT_DIR$/src/index.html" />
         <option value="$PROJECT_DIR$/webpack.config.js" />
         <option value="$PROJECT_DIR$/webpack.release.config.js" />
         <option value="$PROJECT_DIR$/src/js/highlight/test-case/testCaseConfig.js" />
         <option value="$PROJECT_DIR$/src/js/highlight/animations/changeOpacity" />
         <option value="$PROJECT_DIR$/src/js/highlight/highlight.js" />
-        <option value="$PROJECT_DIR$/src/js/highlight/animations/indicationEnlarge.js" />
+        <option value="$PROJECT_DIR$/src/js/highlight/config.js" />
         <option value="$PROJECT_DIR$/src/js/highlight/animations/enlarge.js" />
+        <option value="$PROJECT_DIR$/src/index.html" />
         <option value="$PROJECT_DIR$/src/js/highlight/test-case/testCase.js" />
         <option value="$PROJECT_DIR$/src/js/highlight/highlightSelector.js" />
-        <option value="$PROJECT_DIR$/src/js/highlight/config.js" />
+        <option value="$PROJECT_DIR$/src/js/highlight/animations/indicationEnlarge.js" />
       </list>
     </option>
   </component>
@@ -302,7 +360,7 @@
       <workItem from="1527497815520" duration="30514000" />
       <workItem from="1527584636821" duration="25610000" />
       <workItem from="1527684358204" duration="22310000" />
-      <workItem from="1527766365764" duration="40578000" />
+      <workItem from="1527766365764" duration="44088000" />
     </task>
     <task id="LOCAL-00001" summary="today">
       <created>1527751079962</created>
@@ -315,7 +373,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="200821000" />
+    <option name="totallyTimeSpent" value="204331000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -379,24 +437,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="30" column="33" selection-start-line="30" selection-start-column="20" selection-end-line="30" selection-end-column="33" />
-          <folding>
-            <element signature="n#head#0;n#html#0;n#!!top" />
-            <element signature="n#meta#2;n#head#0;n#html#0;n#!!top" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/webpack.config.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="452">
@@ -430,16 +470,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/highlight/animations/jump.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="563">
-          <caret line="124" column="45" lean-forward="true" selection-start-line="124" selection-start-column="45" selection-end-line="124" selection-end-column="45" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/js/highlight/animations/changeOpacity">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -458,34 +488,49 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/highlight/animations/indicationEnlarge.js">
+    <entry file="file://$PROJECT_DIR$/src/js/highlight/config.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="63" column="28" lean-forward="true" selection-start-line="63" selection-start-column="28" selection-end-line="63" selection-end-column="28" />
+        <state relative-caret-position="425">
+          <caret line="55" column="20" lean-forward="true" selection-start-line="55" selection-start-column="20" selection-end-line="55" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="20" lean-forward="true" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="28" column="7" lean-forward="true" selection-start-line="28" selection-start-column="7" selection-end-line="28" selection-end-column="7" />
           <folding>
-            <element signature="n#!!block;n#stopIncrease#0;n#IndicationEnlarge#0" />
+            <element signature="n#head#0;n#html#0;n#!!top" />
+            <element signature="n#meta#2;n#head#0;n#html#0;n#!!top" />
+            <marker date="1528099552446" expanded="true" signature="680:950" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/js/highlight/animations/enlarge.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="160" lean-forward="true" selection-start-line="160" selection-end-line="160" />
+        <state relative-caret-position="986">
+          <caret line="66" column="5" lean-forward="true" selection-start-line="66" selection-start-column="5" selection-end-line="66" selection-end-column="5" />
           <folding>
             <element signature="n#!!block;n#scale#0;n#Enlarge#0" />
             <element signature="n#!!block;n#scale#1;n#Enlarge#0" />
             <element signature="n#!!block;n#primtiveShapeKey#0;n#Enlarge#0" />
             <element signature="n#!!block;n#primtiveShapeKey#1;n#Enlarge#0" />
-            <element signature="n#!!block;n#easeInOutSin#0;n#Enlarge#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/js/highlight/test-case/testCase.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="491">
-          <caret line="156" column="21" lean-forward="true" selection-start-line="156" selection-start-column="21" selection-end-line="156" selection-end-column="21" />
+        <state relative-caret-position="240">
+          <caret line="18" column="12" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="12" />
           <folding>
             <element signature="e#0#40#0" expanded="true" />
             <element signature="n#!!block;n#animationTypes#0;n#Tester#0" />
@@ -495,16 +540,18 @@
             <element signature="n#!!block;n#_initHighlight#0;n#Tester#0" />
             <element signature="n#!!block;n#_addClickListener#0;n#Tester#0" />
             <element signature="n#!!block;n#_modifyAnimationTypesArr#0;n#Tester#0" />
-            <marker date="1528099143704" expanded="true" signature="5969:6201" ph="..." />
-            <marker date="1528099143704" expanded="true" signature="5971:6201" ph="..." />
+            <element signature="n#!!block;n#_addAnimationSelectEventListener#0;n#Tester#0" />
+            <element signature="e#7936#8614#0" />
+            <marker date="1528101038866" expanded="true" signature="5972:6204" ph="..." />
+            <marker date="1528101038866" expanded="true" signature="5974:6204" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/js/highlight/highlight.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
+        <state relative-caret-position="114">
+          <caret line="25" column="27" selection-start-line="25" selection-start-column="27" selection-end-line="25" selection-end-column="27" />
           <folding>
             <element signature="e#0#42#0" expanded="true" />
           </folding>
@@ -513,18 +560,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/js/highlight/highlightSelector.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
-          <caret line="68" column="82" selection-start-line="68" selection-start-column="82" selection-end-line="68" selection-end-column="82" />
+        <state relative-caret-position="346">
+          <caret line="91" column="63" selection-start-line="91" selection-start-column="63" selection-end-line="91" selection-end-column="63" />
           <folding>
             <element signature="e#0#47#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/highlight/config.js">
+    <entry file="file://$PROJECT_DIR$/src/js/highlight/animations/jump.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="163" column="43" selection-start-line="163" selection-start-column="43" selection-end-line="163" selection-end-column="43" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/highlight/animations/indicationEnlarge.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
-          <caret line="53" column="20" selection-start-line="53" selection-start-column="20" selection-end-line="53" selection-end-column="20" />
+          <caret line="55" lean-forward="true" selection-start-line="55" selection-end-line="55" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+            <element signature="n#!!block;n#stopIncrease#0;n#IndicationEnlarge#0" />
+          </folding>
         </state>
       </provider>
     </entry>
