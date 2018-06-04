@@ -20,13 +20,18 @@ export class Highlight {
     }
 
     startAnimation() {
-        return new Promise((resolve, reject) => {
-            for (let primtiveShapeKey in this.pickedLabel) {
-                this.primtiveShapeKey = primtiveShapeKey;
-                this.setPrimitiveProp();
-            }
-            // resolve(this.stopCallback.bind(this));
-        })
+        // return new Promise((resolve, reject) => {
+        //     for (let primtiveShapeKey in this.pickedLabel) {
+        //         this.primtiveShapeKey = primtiveShapeKey;
+        //         this.setPrimitiveProp();
+        //     }
+        //     // resolve(this.stopCallback.bind(this));
+        // })
+
+        for (let primtiveShapeKey in this.pickedLabel) {
+            this.primtiveShapeKey = primtiveShapeKey;
+            this.setPrimitiveProp();
+        }
     }
 
     setPrimitiveProp(primtiveShapeKey) {

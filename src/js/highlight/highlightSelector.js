@@ -90,10 +90,14 @@ export class HighlightSelector {
 
     start() {
         this.animations.forEach(animation => animation.startAnimation());
+        if(!this.options.interval || this.options.indicationOnly){
+            window.setTimeout(() => {
+                this.stop()
+            }, this.options.duration);
+        }
     }
 
     stop() {
-        window.clearInterval(this.inervalId);
         if(this.animations){
             this.animations.forEach(animation => animation.stopCallback());
         }

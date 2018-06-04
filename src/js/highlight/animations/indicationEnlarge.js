@@ -47,10 +47,11 @@ export class IndicationEnlarge extends Highlight {
             this.primitive[this.options.field] = new Cesium.CallbackProperty(() => {
                 this.scaleSum = this.scaleSum ? this.scaleSum + scalePerStep : scalePerStep;
                 if (this.scaleSum >= 1) {
+                   console.log('here');
                     return 1;
                 }
                 return Cesium.EasingFunction.ELASTIC_OUT(this.scaleSum);
-            },true)
+            },false)
         }
     }
 
@@ -70,7 +71,7 @@ export class IndicationEnlarge extends Highlight {
     // }
 
     calculateEnlargeStep() {
-        const durationInSeconds = this.options.duration;
+        const durationInSeconds = this.options.speed;
         const numberOfSteps = (durationInSeconds / 2) / this.options.timeoutInterval;
         const currentScale = this.options.minScale;
         const destinatedScale = this.options.maxScale;
@@ -85,7 +86,8 @@ export class IndicationEnlarge extends Highlight {
     }
 
     stopCallback() {
-        this.pickedLabel.billboard.scale = 1;
+        console.log('stopCallback');
+        this.primitive[this.options.field] = 1;
         // this.primitive[this.options.field] = this.options.minScale;
     }
 
