@@ -48,10 +48,10 @@ export const Types = {
 export const defaultOptions = {
     // duration: 4,//if 0, stop manually with callback
     animationType: [AnimateType.shrinkGrow],
-    // color: Types.billboard.color,
     primitiveType: 'billboard',
     field: 'scale',
     maxScale: 1.5,
+    scalePercent:0.5,
     minScale: 1,
     currentScale: 1,
     interval: true,

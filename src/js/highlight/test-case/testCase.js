@@ -116,6 +116,7 @@ export class Tester {
                     name: 'billboard',
                     position: this.cesium.Cartesian3.fromDegrees(billboard.position.x, billboard.position.y),
                     billboard: {
+                        scale: 1.5,
                         image: 'images/man-user.svg',
                         verticalOrigin: this.cesium.VerticalOrigin.BOTTOM,
                         width: 25,
@@ -140,9 +141,17 @@ export class Tester {
                 entity.filterArr.forEach(catagory => {
                     if (catagory.occupationFilter != undefined && catagory.occupationFilter === selected) {
                         const animation = entity.highlight;
+
+                        //option 1
                         // animation.setup(this.animationTypes, {indicationOnly: false}, entity);
+                        //option 2
                         // animation.setup(this.animationTypes, {indicationOnly: false, duration: 5000}, entity);
-                        animation.setup(this.animationTypes, {indicationOnly: false, interval: true}, entity);
+                        //option 3
+                        //if(entity.scale)
+                        // if(entity.billboard.scale._value > 1){
+                        //     animation.setup(this.animationTypes, {indicationOnly: false, interval: true, minScale: entity.billboard.scale._value}, entity);
+                        // }
+                        animation.setup(this.animationTypes, {indicationOnly: false, interval: false, scalePercent: 0.9}, entity);
                         animation.start();
                         // setTimeout(() => animation.stop(), 5000);
                     }

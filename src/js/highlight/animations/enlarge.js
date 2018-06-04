@@ -102,9 +102,24 @@ export class Enlarge extends Highlight {
     //     // }
     // }
     //setAnimateLinear
+    // setAnimate() {
+    //     const scalePerStep = this.calculateEnlargeStep();
+    //     if (this.options.maxScale <= this.scale && this.increase) {
+    //         this.increase = false;
+    //     }
+    //     if (this.options.minScale > this.scale && !this.increase) {
+    //         this.increase = true;
+    //     }
+    //     this.scale += this.increase ? scalePerStep : -scalePerStep;
+    //     this.primitive[this.options.field] = this.scale;
+    // }
+
     setAnimate() {
+        const scalePercent = this.options.scalePercent + 1;
+        const scaleMax = this.options.minScale * scalePercent;
+        console.log(scaleMax);
         const scalePerStep = this.calculateEnlargeStep();
-        if (this.options.maxScale <= this.scale && this.increase) {
+        if (scaleMax <= this.scale && this.increase) {
             this.increase = false;
         }
         if (this.options.minScale > this.scale && !this.increase) {
@@ -131,12 +146,24 @@ export class Enlarge extends Highlight {
     //     }
     // }
 
+    // calculateEnlargeStep() {
+    //     const durationInSeconds = this.options.duration;
+    //     const numberOfSteps = (durationInSeconds / 2) / this.options.timeoutInterval;
+    //     const currentScale = this.options.minScale;
+    //     const destinatedScale = this.options.maxScale;
+    //     const scaleDelta = destinatedScale - currentScale;
+    //     const scalePerStep = scaleDelta / numberOfSteps;
+    //     return scalePerStep;
+    // }
+
     calculateEnlargeStep() {
+        debugger;
+
         const durationInSeconds = this.options.duration;
         const numberOfSteps = (durationInSeconds / 2) / this.options.timeoutInterval;
         const currentScale = this.options.minScale;
-        const destinatedScale = this.options.maxScale;
-        const scaleDelta = destinatedScale - currentScale;
+        const scalePercent = 1 + this.options.scalePercent;
+        const scaleDelta = (scalePercent * currentScale) - currentScale;
         const scalePerStep = scaleDelta / numberOfSteps;
         return scalePerStep;
     }

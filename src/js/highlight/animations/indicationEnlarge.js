@@ -58,7 +58,8 @@ export class IndicationEnlarge extends Highlight {
         const numberOfSteps = (durationInSeconds / 2) / this.options.timeoutInterval;
         const currentScale = this.options.minScale;
         const destinatedScale = this.options.maxScale;
-        const scaleDelta = destinatedScale - currentScale;
+        const scalePercent =1 + this.options.scalePercent;
+        const scaleDelta = scalePercent*currentScale - currentScale;
         const scalePerStep = scaleDelta / numberOfSteps;
         return scalePerStep;
     }

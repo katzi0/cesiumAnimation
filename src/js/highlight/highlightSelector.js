@@ -63,16 +63,15 @@ export class HighlightSelector {
             animationArr.forEach(animation => {
                 switch (animation) {
                     case AnimateType.shrinkGrow:
-                        helperArr.push(new Enlarge(this.selectedEntity));
+                        helperArr.push(new Enlarge(this.selectedEntity, this.options));
                         break;
                     case AnimateType.IndicationEnlarge:
-                        helperArr.push(new IndicationEnlarge(this.selectedEntity));
+                        helperArr.push(new IndicationEnlarge(this.selectedEntity, this.options));
                         break;
                     case AnimateType.flicker:
                         helperArr.push(new Flicker(this.selectedEntity));
                         break;
                     case AnimateType.changeOpacity:
-                        debugger;
                         helperArr.push(new ChangeOpacity(this.selectedEntity));
                         break;
                     case AnimateType.jump:
