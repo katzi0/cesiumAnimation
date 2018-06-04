@@ -50,7 +50,7 @@ export class IndicationEnlarge extends Highlight {
                    console.log('here');
                     return 1;
                 }
-                return Cesium.EasingFunction.ELASTIC_OUT(this.scaleSum);
+                return Cesium.EasingFunction[this.options.easingFunction](this.scaleSum);
             },false)
         }
     }

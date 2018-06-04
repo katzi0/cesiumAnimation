@@ -58,15 +58,4 @@ export class Highlight {
         if (Cesium.defined(this.entity.billboard))
             this.pickedLabel.billboard = this.entity.billboard;
     };
-
-    addAnimationType(type) {
-        let animationTypeArr = [];
-        this.options.animationType.forEach(x => animationTypeArr.push(x));
-        animationTypeArr.push(type);
-        this.options.animationType = animationTypeArr;
-    };
-
-    removeAnimationType(selectedType){
-        this.options.animationType = this.options.animationType.filter(type =>  type !== selectedType);
-    };
 }

@@ -122,11 +122,12 @@ export class Enlarge extends Highlight {
         const scalePerStep = this.calculateEnlargeStep();
         const interval = setInterval(() => {
             if (scaleMax <= this.scale && this.increase) {
+                this.increase=!this.increase;
+            }
+            if (this.options.minScale >= this.scale && !this.increase) {
                 clearInterval(interval);
             }
-            if (this.options.minScale > this.scale && !this.increase) {
-                clearInterval(interval);
-            }
+
             this.scale += this.increase ? scalePerStep : -scalePerStep;
             this.primitive[this.options.field]  = this.scale;
         },this.options.timeoutInterval);

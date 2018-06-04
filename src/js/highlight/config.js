@@ -1,4 +1,4 @@
-import { IndicationEnlarge } from "./animations/indicationEnlarge";
+import { Cesium } from '../../index';
 
 export const AnimateType = {
     shrinkGrow: 'shrink/grow',
@@ -53,15 +53,12 @@ export const defaultOptions = {
     maxScale: 1.5,
     scalePercent:0.5,
     minScale: 1,
-    currentScale: 1,
     interval: true,
     timeoutInterval: 16,
     speed: 1000,
     duration: 2000,
-    color: 'LIGHTSTEELBLUE',
-    opacityEndResult: 0.3,
-    jumpMaxHeight: 50,
-    indicationOnly: false
+    indicationOnly: false,
+    easingFunction: 'ELASTIC_OUT'
 };
 
 
