@@ -34,7 +34,6 @@ export class IndicationEnlarge extends Highlight {
             this.primitive[this.options.field] = new Cesium.CallbackProperty(() => {
                 this.scaleSum = this.scaleSum ? this.scaleSum + scalePerStep : scalePerStep;
                 if (this.scaleSum >= 1) {
-                   console.log('here');
                     return 1;
                 }
                 return Cesium.EasingFunction[this.options.easingFunction](this.scaleSum);
@@ -46,7 +45,6 @@ export class IndicationEnlarge extends Highlight {
         const durationInSeconds = this.options.speed;
         const numberOfSteps = (durationInSeconds / 2) / this.options.timeoutInterval;
         const currentScale = this.options.minScale;
-        const destinatedScale = this.options.maxScale;
         const scalePercent =1 + this.options.scalePercent;
         const scaleDelta = scalePercent*currentScale - currentScale;
         const scalePerStep = scaleDelta / numberOfSteps;

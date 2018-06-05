@@ -32,19 +32,35 @@ export class Enlarge extends Highlight {
         this.setAnimate();
     }
 
+    set scaleSum(scaleSum) {
+        this._scaleSum = scaleSum;
+    }
+
+    get scaleSum() {
+        return this._scaleSum;
+    }
+
+
     setAnimate() {
         const scalePercent = this.options.scalePercent + 1;
         const scaleMax = this.options.minScale * scalePercent;
-        const scalePerStep = this.calculateEnlargeStep();
+        let scalePerStep = this.calculateEnlargeStep();
 
         this.primitive[this.options.field] = new Cesium.CallbackProperty(() => {
-            if (scaleMax <= this.scale && this.increase) {
+            this.scaleSum = this.scaleSum ? this.scaleSum + scalePerStep : 1;
+            if (this.scaleSum >= 1) {
                 this.increase = false;
+                scalePerStep = -scalePerStep;
+                this.scaleSum += scalePerStep;
             }
-            if (this.options.minScale > this.scale && !this.increase) {
+            if (this.scaleSum <= 0){
                 this.increase = true;
+                scalePerStep = scalePerStep * -1;
+                this.scaleSum += scalePerStep;
             }
-            this.scale += this.increase ? scalePerStep : -scalePerStep;
+
+            this.scale = this.increase ? Cesium.EasingFunction.BACK_OUT(this.scaleSum) : Cesium.EasingFunction.BACK_IN(this.scaleSum);
+            this.scale += this.options.minScale;
             return this.scale;
         }, false)
     }
